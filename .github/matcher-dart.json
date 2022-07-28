@@ -1,0 +1,18 @@
+{
+  "problemMatcher": [
+    {
+      "owner": "flutter",
+      "pattern": [
+        {
+          "regexp": "^\\s*(error|warning|info)\\s•\\s(.+)\\s•\\s(.+):(\\d+):(\\d+)\\s•\\s(.+)$",
+          "file": 3,
+          "line": 4,
+          "column": 5,
+          "severity": 1,
+          "message": 2,
+          "code": 6
+        }
+      ]
+    }
+  ]
+}

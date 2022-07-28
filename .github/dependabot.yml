@@ -1,0 +1,19 @@
+version: 2
+enable-beta-ecosystems: true
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      timezone: Asia/Singapore
+    reviewers:
+      - serverwentdown
+
+  - package-ecosystem: pub
+    directory: /app/
+    schedule:
+      interval: weekly
+      timezone: Asia/Singapore
+    reviewers:
+      - serverwentdown
+# vim: set et ts=2 sw=2:
