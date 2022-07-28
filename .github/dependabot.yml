@@ -10,10 +10,19 @@ updates:
       - serverwentdown
 
   - package-ecosystem: pub
-    directory: /app/
+    directory: /habitat_sdk/
     schedule:
       interval: weekly
       timezone: Asia/Singapore
     reviewers:
       - serverwentdown
+
+  - package-ecosystem: pub
+    directory: /dwn_sdk/
+    schedule:
+      interval: weekly
+      timezone: Asia/Singapore
+    reviewers:
+      - serverwentdown
+
 # vim: set et ts=2 sw=2:
