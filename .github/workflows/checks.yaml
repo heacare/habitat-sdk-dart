@@ -47,10 +47,10 @@ jobs:
       run:
         working-directory: packages/${{ matrix.package }}
     steps:
-      - uses: subosito/flutter-action@6c2e035f2692eeac890d854df95630c72673f130
-        with:
-          flutter-version: ${{ matrix.flutter }}
-          cache: true
+      #- uses: subosito/flutter-action@6c2e035f2692eeac890d854df95630c72673f130
+      #  with:
+      #    flutter-version: ${{ matrix.flutter }}
+      #    cache: true
       - uses: actions/cache@v3
         with:
           path: ${{ runner.tool_cache }}/dart-sdk
@@ -104,10 +104,10 @@ jobs:
       run:
         working-directory: packages/${{ matrix.package }}
     steps:
-      - uses: subosito/flutter-action@6c2e035f2692eeac890d854df95630c72673f130
-        with:
-          flutter-version: ${{ matrix.flutter }}
-          cache: true
+      #- uses: subosito/flutter-action@6c2e035f2692eeac890d854df95630c72673f130
+      #  with:
+      #    flutter-version: ${{ matrix.flutter }}
+      #    cache: true
       - uses: actions/cache@v3
         with:
           path: ${{ runner.tool_cache }}/dart-sdk
@@ -124,6 +124,12 @@ jobs:
           key: ${{ runner.os }}-dart-pub-cache-${{ hashFiles('**/pubspec.yaml')}}
       - run: dart pub get
       - run: dart run webcrypto:setup
-      - run: dart test .
+      - run: dart test . --reporter expanded --coverage
+      - run: mv coverage/lcov.info coverage/lcov-${{ matrix.package }}.info
+      - name: Upload code coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: packages/${{ matrix.package }}/coverage/lcov*.info
 
 # vim: set et ts=2 sw=2:
