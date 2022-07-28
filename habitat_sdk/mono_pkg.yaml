@@ -5,15 +5,12 @@ sdk:
   - dev
 
 stages:
-  - analyze:
-    - group:
-      - analyze
-      sdk: stable
-  - format:
+  - analyze_and_format:
     - group:
       - format
+      - analyze: "| sed 's/^   info/warning/g'"
       sdk: stable
-  - test:
-    - test
+  - unit_test:
+    - test: --test-randomize-ordering-seed=random
 
 # vim: set et ts=2 sw=2:
