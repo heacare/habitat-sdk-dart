@@ -1,6 +1,8 @@
 
 # Habitat SDK
 
+[![Dart CI](https://github.com/heacare/habitat-sdk-dart/actions/workflows/dart.yml/badge.svg)](https://github.com/heacare/habitat-sdk-dart/actions/workflows/dart.yml)
+
 ## Introduction
 
 This is the reference implementaion of Habitat, an open, composable data network built on top of DWN, in Dart. Habitat and DWN both are still in a draft state so things may change rapidly.
