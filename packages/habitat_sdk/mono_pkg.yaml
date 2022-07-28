@@ -1,0 +1,19 @@
+# See https://pub.dev/packages/mono_repo for details
+
+sdk:
+  - stable
+  - dev
+
+stages:
+  - analyze:
+    - group:
+      - analyze
+      sdk: stable
+  - format:
+    - group:
+      - format
+      sdk: stable
+  - test:
+    - test
+
+# vim: set et ts=2 sw=2:

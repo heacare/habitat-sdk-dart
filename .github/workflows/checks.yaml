@@ -55,7 +55,7 @@ jobs:
         with:
           path: ${{ runner.tool_cache }}/dart-sdk
           key: ${{ runner.os }}-dart-sdk-${{ matrix.dart }}
-      - uses: dart-lang/setup-dart@v1.3
+      - uses: heacare/setup-dart@add-matcher
         with:
           sdk: ${{ matrix.dart }}
       - uses: actions/checkout@v3
@@ -84,7 +84,7 @@ jobs:
         with:
           path: ${{ runner.tool_cache }}/dart-sdk
           key: ${{ runner.os }}-dart-sdk-${{ matrix.dart }}
-      - uses: dart-lang/setup-dart@v1.3
+      - uses: heacare/setup-dart@add-matcher
         with:
           sdk: ${{ matrix.dart }}
       - uses: actions/checkout@v3
@@ -112,7 +112,7 @@ jobs:
         with:
           path: ${{ runner.tool_cache }}/dart-sdk
           key: ${{ runner.os }}-dart-sdk-${{ matrix.dart }}
-      - uses: dart-lang/setup-dart@v1.3
+      - uses: heacare/setup-dart@add-matcher
         with:
           sdk: ${{ matrix.dart }}
       - uses: actions/checkout@v3
