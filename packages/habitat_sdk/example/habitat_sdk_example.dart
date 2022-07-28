@@ -2,5 +2,5 @@
 import 'package:habitat_sdk/habitat_sdk.dart';
 
 void main() {
-  DWN().testCrypto();
+  final DWN dwn = DWN();
 }

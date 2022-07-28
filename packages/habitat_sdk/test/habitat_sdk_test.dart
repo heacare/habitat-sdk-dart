@@ -12,9 +12,5 @@ void main() {
     test('has a test property', () {
       expect(dwn.test, true);
     });
-
-    test('can do crypto', () {
-      dwn.testCrypto();
-    });
   });
 }
