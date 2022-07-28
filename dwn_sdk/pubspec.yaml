@@ -1,5 +1,5 @@
-name: habitat_sdk
-description: A Dart implementation of Habitat, an open, composable data network built on top of DWN
+name: dwn_sdk
+description: A Dart implementation of Distributed Web Node (DWN)
 version: 0.1.0
 homepage: https://github.com/heacare/habitat-sdk-dart
 repository: https://github.com/heacare/habitat-sdk-dart
