@@ -1,3 +1,10 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:json_annotation/json_annotation.dart';
+
+part 'did_resolver.g.dart';
+
 /// The overall resolver for all DIDs across all implemented local and remote methods
 ///
 /// View https://www.w3.org/TR/did-core/#resolution
@@ -35,13 +42,23 @@ class DIDResolver {
   ///
   /// If [useRemote] is True: Uses a remote [Universal Resolver](https://github.com/decentralized-identity/universal-resolver)
   /// If [useRemote] is False: Uses the locally implemented method resolvers
-  Future<DIDResolutionResult> resolve(final String did) {
+  Future<DIDResolutionResult> resolve(final String did) async {
     if (useRemote) {
-      throw UnimplementedError(
-          'Remote DID resolvers have not been implemented yet');
+      final Uri url = Uri.parse('$remoteUrl/1.0/identifiers/$did');
+      final http.Response response =
+          await http.get(url, headers: {'Accept': 'application/did+json'});
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      final Map<String, dynamic> didResolutionResult =
+          jsonDecode(response.body) as Map<String, dynamic>;
+
+      return DIDResolutionResult.fromJson(didResolutionResult);
     } else {
       throw UnimplementedError(
-          'Local DID resolvers have not been implemented yet');
+        'Local DID resolvers have not been implemented yet',
+      );
     }
   }
 }
@@ -56,6 +73,7 @@ abstract class DIDMethodResolver {
 }
 
 /// The return format of a DID Resolution operation.
+@JsonSerializable()
 class DIDResolutionResult {
   /// Initialize the [DIDResolutionResult]
   DIDResolutionResult({
@@ -64,6 +82,13 @@ class DIDResolutionResult {
     this.didDocument,
     this.didDocumentMetadata,
   });
+
+  /// Deserialize class from JSON
+  factory DIDResolutionResult.fromJson(final Map<String, dynamic> json) =>
+      _$DIDResolutionResultFromJson(json);
+
+  /// Serialize class to JSON
+  Map<String, dynamic> toJson() => _$DIDResolutionResultToJson(this);
 
   /// A copy of the context from the DID Document.
   final List<String> context;
@@ -78,9 +103,50 @@ class DIDResolutionResult {
   final DIDDocumentMetadata? didDocumentMetadata;
 }
 
+/// The fields of metadata related to a DID Resolution operation.
+@JsonSerializable()
+class DIDResolutionMetadata {
+  /// Initialize the [DIDResolutionMetadata] type.
+  DIDResolutionMetadata({
+    this.contentType,
+    this.error,
+  });
+
+  /// Deserialize class from JSON
+  factory DIDResolutionMetadata.fromJson(final Map<String, dynamic> json) =>
+      _$DIDResolutionMetadataFromJson(json);
+
+  /// Serialize class to JSON
+  Map<String, dynamic> toJson() => _$DIDResolutionMetadataToJson(this);
+
+  /// The contentType of the resolved DID Document.
+  final String? contentType;
+
+  /// The error thrown by the DID Resolver.
+  final DIDResolutionError? error;
+}
+
+/// The errors that might rise from a DID Resolution operation.
+@JsonEnum()
+enum DIDResolutionError {
+  /// The DID supplied to the DID resolution function does not conform to valid syntax.
+  invalidDID,
+
+  /// The DID resolver was unable to find the DID document resulting from this resolution request.
+  notFound,
+
+  /// This error code is returned if the representation requested via the accept input metadata
+  /// property is not supported by the DID method and/or DID resolver implementation.
+  representationNotSupported,
+
+  /// The requested DID method is not supported
+  unsupportedDIDMethod
+}
+
 /// A model of a DID Document.
 ///
 /// View https://www.w3.org/TR/did-core/#did-documents
+@JsonSerializable()
 class DIDDocument {
   /// Initialize the [DIDDocument] type.
   DIDDocument({
@@ -95,6 +161,13 @@ class DIDDocument {
     this.capabilityInvocation = const <VerificationMethod>[],
     this.capabilityDelegation = const <VerificationMethod>[],
   });
+
+  /// Deserialize class from JSON
+  factory DIDDocument.fromJson(final Map<String, dynamic> json) =>
+      _$DIDDocumentFromJson(json);
+
+  /// Serialize class to JSON
+  Map<String, dynamic> toJson() => _$DIDDocumentToJson(this);
 
   final List<String> context;
   final String id;
@@ -111,6 +184,7 @@ class DIDDocument {
 /// A model of a service endpoint.
 ///
 /// View https://www.w3.org/TR/did-core/#dfn-service-endpoints
+@JsonSerializable()
 class ServiceEndpoint {
   /// Initialize the [ServiceEndpoint] type.
   ServiceEndpoint({
@@ -119,6 +193,13 @@ class ServiceEndpoint {
     this.serviceEndpoint,
     this.description,
   });
+
+  /// Deserialize class from JSON
+  factory ServiceEndpoint.fromJson(final Map<String, dynamic> json) =>
+      _$ServiceEndpointFromJson(json);
+
+  /// Serialize class to JSON
+  Map<String, dynamic> toJson() => _$ServiceEndpointToJson(this);
 
   /// A DID URL, conformat to the [DID URL Syntax]:https://www.w3.org/TR/did-core/#did-url-syntax.
   final String? id;
@@ -136,6 +217,7 @@ class ServiceEndpoint {
 /// A model of a specific verification method.
 ///
 /// View https://www.w3.org/TR/did-core/#verification-methods
+@JsonSerializable()
 class VerificationMethod {
   /// Initialize the [VerificationMethod] type
   VerificationMethod({
@@ -145,6 +227,13 @@ class VerificationMethod {
     this.publicKeyJwk,
     this.publicKeyMultibase,
   });
+
+  /// Deserialize class from JSON
+  factory VerificationMethod.fromJson(final Map<String, dynamic> json) =>
+      _$VerificationMethodFromJson(json);
+
+  /// Serialize class to JSON
+  Map<String, dynamic> toJson() => _$VerificationMethodToJson(this);
 
   /// A DID URL, conformat to the [DID URL Syntax]:https://www.w3.org/TR/did-core/#did-url-syntax.
   final String? id;
@@ -162,30 +251,8 @@ class VerificationMethod {
   final String? publicKeyMultibase;
 }
 
-/// The fields of metadata related to a DID Resolution operation.
-class DIDResolutionMetadata {
-  /// Initialize the [DIDResolutionMetadata] type.
-  DIDResolutionMetadata({
-    this.contentType,
-    this.error,
-  });
-
-  /// The contentType of the resolved DID Document.
-  final String? contentType;
-
-  /// The error thrown by the DID Resolver.
-  final DIDResolutionError? error;
-}
-
-/// The errors that might rise from a DID Resolution operation.
-enum DIDResolutionError {
-  invalidDID,
-  notFound,
-  representationNotSupported,
-  unsupportedDIDMethod
-}
-
 /// A model of the metadata attached to a DID Document.
+@JsonSerializable()
 class DIDDocumentMetadata {
   /// Initialize the [DIDDocumentMetadata] type.
   DIDDocumentMetadata({
@@ -198,6 +265,13 @@ class DIDDocumentMetadata {
     this.equivalentId,
     this.canonicalId,
   });
+
+  /// Deserialize class from JSON
+  factory DIDDocumentMetadata.fromJson(final Map<String, dynamic> json) =>
+      _$DIDDocumentMetadataFromJson(json);
+
+  /// Serialize class to JSON
+  Map<String, dynamic> toJson() => _$DIDDocumentMetadataToJson(this);
 
   /// The ISO8601 timestamp of the Create operation.
   final String? created;
