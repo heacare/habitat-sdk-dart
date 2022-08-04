@@ -12,9 +12,10 @@ class DIDResolver {
   /// Initialize the DID Resolver, and load resolvers in the map.
   DIDResolver(
     final List<DIDMethodResolver> resolvers, {
-    this.useRemote = true,
+    this.useRemote = false,
     this.remoteUrl,
-  }) {
+    final http.Client? client,
+  }) : httpClient = client ?? http.Client() {
     // Validate that if remote is enabled, the URL is provided
     if (useRemote && remoteUrl == null) {
       throw ArgumentError('Cannot useRemote without remoteUrl');
@@ -38,6 +39,9 @@ class DIDResolver {
   /// The URL to access the remote resolver
   final String? remoteUrl;
 
+  /// The optional Client to use to make remote requests.
+  final http.Client httpClient;
+
   /// Resolve a DID with a variety of methods.
   ///
   /// If [useRemote] is True: Uses a remote [Universal Resolver](https://github.com/decentralized-identity/universal-resolver)
@@ -45,11 +49,13 @@ class DIDResolver {
   Future<DIDResolutionResult> resolve(final String did) async {
     if (useRemote) {
       final Uri url = Uri.parse('$remoteUrl/1.0/identifiers/$did');
-      final http.Response response =
-          await http.get(url, headers: {'Accept': 'application/did+json'});
+      final http.Response response = await httpClient
+          .get(url, headers: {'Accept': 'application/did+json'});
 
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      /*
+        print('Response status: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      */
 
       final Map<String, dynamic> didResolutionResult =
           jsonDecode(response.body) as Map<String, dynamic>;
