@@ -1,11 +1,7 @@
 class CID {
   CID();
 
-  factory CID.fromJson(final String json) {
-	return CID();
-  }
+  factory CID.fromJson() => CID();
 
-  String toJson() {
-	return '';
-  }
+  String toJson() => '';
 }
