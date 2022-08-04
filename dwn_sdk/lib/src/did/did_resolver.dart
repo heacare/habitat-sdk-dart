@@ -282,7 +282,7 @@ class DIDDocumentMetadata {
   /// The activity state of the DID.
   final bool? deactivated;
 
-  /// The version of the last Update opeation that was resolved.
+  /// The version of the last Update operation that was resolved.
   final String? versionId;
 
   /// The ISO8601 timestamp of the next Update operation if the resolved document version
