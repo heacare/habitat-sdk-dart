@@ -1,7 +1,11 @@
 class CID {
   CID();
 
-  //CID.fromJson(final dynamic json) :
+  factory CID.fromJson(final String json) {
+	return CID();
+  }
 
-  //factory CID.generate(final ) => CID();
+  String toJson() {
+	return '';
+  }
 }
