@@ -110,8 +110,10 @@ void main() {
       expect(verificationMethod.type, equals(expected.type));
       expect(verificationMethod.controller, equals(expected.controller));
       expect(verificationMethod.publicKeyJwk, equals(expected.publicKeyJwk));
-      expect(verificationMethod.publicKeyMultibase,
-          equals(expected.publicKeyMultibase));
+      expect(
+        verificationMethod.publicKeyMultibase,
+        equals(expected.publicKeyMultibase),
+      );
     });
   });
 
