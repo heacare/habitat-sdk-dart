@@ -12,7 +12,7 @@ part 'permissions.g.dart';
 class PermissionsRequestMessage extends Message {
   /// Constructs a new PermissionsRequest message
   PermissionsRequestMessage({
-    final Uint8List? data,
+    final MessageData? data,
     required final PermissionsRequestDescriptor descriptor,
   }) : super(descriptor: descriptor, data: data);
 
@@ -29,7 +29,7 @@ class PermissionsRequestMessage extends Message {
 class PermissionsGrantMessage extends Message {
   /// Constructs a new PermissionsGrant message
   PermissionsGrantMessage({
-    final Uint8List? data,
+    final MessageData? data,
     required final PermissionsGrantDescriptor descriptor,
   }) : super(descriptor: descriptor, data: data);
 

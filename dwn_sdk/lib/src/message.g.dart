@@ -7,29 +7,25 @@ part of 'message.dart';
 // **************************************************************************
 
 Message _$MessageFromJson(Map<String, dynamic> json) => Message(
-      data: _$JsonConverterFromJson<String, Uint8List>(
-          json['data'], const JsonBase64UrlConverter().fromJson),
+      data: json['data'] == null ? null : MessageData.fromJson(json['data']),
       descriptor: MessageDescriptor.fromJson(
           json['descriptor'] as Map<String, dynamic>),
+      authorization: json['authorization'] == null
+          ? null
+          : MessageAuthorization.fromJson(JsonWebSignature.fromJson(
+              json['authorization'] as Map<String, dynamic>)),
+      attestation: json['attestation'] == null
+          ? null
+          : MessageAttestation.fromJson(JsonWebSignature.fromJson(
+              json['attestation'] as Map<String, dynamic>)),
     );
 
 Map<String, dynamic> _$MessageToJson(Message instance) => <String, dynamic>{
-      'data': _$JsonConverterToJson<String, Uint8List>(
-          instance.data, const JsonBase64UrlConverter().toJson),
+      'data': instance.data,
       'descriptor': instance.descriptor,
+      'authorization': instance.authorization,
+      'attestation': instance.attestation,
     };
-
-Value? _$JsonConverterFromJson<Json, Value>(
-  Object? json,
-  Value? Function(Json json) fromJson,
-) =>
-    json == null ? null : fromJson(json as Json);
-
-Json? _$JsonConverterToJson<Json, Value>(
-  Value? value,
-  Json? Function(Value value) toJson,
-) =>
-    value == null ? null : toJson(value);
 
 MessageDescriptor _$MessageDescriptorFromJson(Map<String, dynamic> json) =>
     MessageDescriptor(

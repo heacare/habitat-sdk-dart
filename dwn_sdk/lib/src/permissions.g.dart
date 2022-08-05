@@ -9,8 +9,7 @@ part of 'permissions.dart';
 PermissionsRequestMessage _$PermissionsRequestMessageFromJson(
         Map<String, dynamic> json) =>
     PermissionsRequestMessage(
-      data: _$JsonConverterFromJson<String, Uint8List>(
-          json['data'], const JsonBase64UrlConverter().fromJson),
+      data: json['data'] == null ? null : MessageData.fromJson(json['data']),
       descriptor: PermissionsRequestDescriptor.fromJson(
           json['descriptor'] as Map<String, dynamic>),
     );
@@ -18,28 +17,14 @@ PermissionsRequestMessage _$PermissionsRequestMessageFromJson(
 Map<String, dynamic> _$PermissionsRequestMessageToJson(
         PermissionsRequestMessage instance) =>
     <String, dynamic>{
-      'data': _$JsonConverterToJson<String, Uint8List>(
-          instance.data, const JsonBase64UrlConverter().toJson),
+      'data': instance.data,
       'descriptor': instance.descriptor,
     };
-
-Value? _$JsonConverterFromJson<Json, Value>(
-  Object? json,
-  Value? Function(Json json) fromJson,
-) =>
-    json == null ? null : fromJson(json as Json);
-
-Json? _$JsonConverterToJson<Json, Value>(
-  Value? value,
-  Json? Function(Value value) toJson,
-) =>
-    value == null ? null : toJson(value);
 
 PermissionsGrantMessage _$PermissionsGrantMessageFromJson(
         Map<String, dynamic> json) =>
     PermissionsGrantMessage(
-      data: _$JsonConverterFromJson<String, Uint8List>(
-          json['data'], const JsonBase64UrlConverter().fromJson),
+      data: json['data'] == null ? null : MessageData.fromJson(json['data']),
       descriptor: PermissionsGrantDescriptor.fromJson(
           json['descriptor'] as Map<String, dynamic>),
     );
@@ -47,8 +32,7 @@ PermissionsGrantMessage _$PermissionsGrantMessageFromJson(
 Map<String, dynamic> _$PermissionsGrantMessageToJson(
         PermissionsGrantMessage instance) =>
     <String, dynamic>{
-      'data': _$JsonConverterToJson<String, Uint8List>(
-          instance.data, const JsonBase64UrlConverter().toJson),
+      'data': instance.data,
       'descriptor': instance.descriptor,
     };
 

@@ -21,8 +21,7 @@ abstract class Message {
   });
 
   /// The raw message data in bytes.
-  @JsonBase64UrlConverter()
-  final Uint8List? data;
+  final MessageData? data;
 
   /// A descriptor object describing the message.
   final MessageDescriptor descriptor;
@@ -32,6 +31,44 @@ abstract class Message {
 
   /// Optional attestation for the message.
   final MessageAttestation? attestation;
+}
+
+/// The message data. May be encrypted
+class MessageData {
+	/// Constructs a message data wrapper
+	MessageData({
+		this.data,
+		this.encryptedData,
+	}) : assert(data == null || encryptedData == null, 'message data can only be encrypted or unencrypted');
+
+  /// Constructs a JWE from a flattened or general JSON representation.
+  factory MessageData.fromJson(final dynamic json)	{
+	if (json is String) {
+		return MessageData(data: _base64UrlConverter.fromJson(json));
+	}
+	if (json is Map<String, dynamic>) {
+		return MessageData(encryptedData: JWE.fromJson(json));
+	}
+	throw const FormatException("message data is not a string or object");
+  }
+
+ /// Unencrypted message data
+  final Uint8List? data;
+  /// Encrypted message data
+  final JWE? encryptedData;
+
+  static const JsonBase64UrlConverter _base64UrlConverter = JsonBase64UrlConverter();
+
+  /// Returns a JSON string when data is unencrypted, otherwise return the 
+  /// general representation of the JWE.
+  dynamic toJson() {
+	if (data != null) {
+		return _base64UrlConverter.toJson(data!);
+	}
+	if (encryptedData != null) {
+		return encryptedData!.toJson();
+	}
+}
 }
 
 /// Information about a message.
@@ -66,6 +103,9 @@ class MessageDescriptor {
 class MessageAuthorization extends JWS {
   /// Wrap an existing JsonWebSignature.
   MessageAuthorization(super.jws);
+
+  /// Constructs a JWS from a flattened or general JSON representation.
+  MessageAuthorization.fromJson(super.json);
 }
 
 /// Some messages may require attestation by a signer.
@@ -88,4 +128,7 @@ class MessageAttestation extends JWS {
   /// ...
   /// ```
   MessageAttestation(super.jws);
+
+  /// Constructs a JWS from a flattened or general JSON representation.
+  MessageAttestation.fromJson(super.json);
 }
