@@ -1,7 +1,7 @@
 class CID {
   CID();
 
-  factory CID.fromJson() => CID();
+  factory CID.fromJson(final Map<String, dynamic> json) => CID();
 
-  String toJson() => '';
+  Map<String, dynamic> toJson() => <String, dynamic>{'oops': 'im dead'};
 }

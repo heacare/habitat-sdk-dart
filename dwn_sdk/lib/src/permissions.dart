@@ -1,27 +1,48 @@
 import 'dart:typed_data';
 
+import 'package:json_annotation/json_annotation.dart';
+
 import './cid.dart';
 import './message.dart';
 
+part 'permissions.g.dart';
+
 /// A message to request permissions
+@JsonSerializable()
 class PermissionsRequestMessage extends Message {
   /// Constructs a new PermissionsRequest message
   PermissionsRequestMessage({
     final Uint8List? data,
     required final PermissionsRequestDescriptor descriptor,
   }) : super(descriptor: descriptor, data: data);
+
+  /// Deserialize object from JSON
+  factory PermissionsRequestMessage.fromJson(final Map<String, dynamic> json) =>
+      _$PermissionsRequestMessageFromJson(json);
+
+  /// Serialize object to JSON
+  Map<String, dynamic> toJson() => _$PermissionsRequestMessageToJson(this);
 }
 
 /// A message to grant permissions
+@JsonSerializable()
 class PermissionsGrantMessage extends Message {
   /// Constructs a new PermissionsGrant message
   PermissionsGrantMessage({
     final Uint8List? data,
     required final PermissionsGrantDescriptor descriptor,
   }) : super(descriptor: descriptor, data: data);
+
+  /// Deserialize object from JSON
+  factory PermissionsGrantMessage.fromJson(final Map<String, dynamic> json) =>
+      _$PermissionsGrantMessageFromJson(json);
+
+  /// Serialize object to JSON
+  Map<String, dynamic> toJson() => _$PermissionsGrantMessageToJson(this);
 }
 
 /// A [MessageDescriptor] for a [PermissionsRequestMessage]
+@JsonSerializable()
 class PermissionsRequestDescriptor extends MessageDescriptor {
   /// Constructor
   const PermissionsRequestDescriptor({
@@ -40,6 +61,14 @@ class PermissionsRequestDescriptor extends MessageDescriptor {
           dataCid: dataCid,
           dataFormat: dataFormat,
         );
+
+  /// Deserialize object from JSON
+  factory PermissionsRequestDescriptor.fromJson(
+          final Map<String, dynamic> json) =>
+      _$PermissionsRequestDescriptorFromJson(json);
+
+  /// Serialize object to JSON
+  Map<String, dynamic> toJson() => _$PermissionsRequestDescriptorToJson(this);
 
   /// A UUIDv4 String representing the PermissionRequest object the permission is being granted in relation to.
   final String? permissionRequestId;
@@ -61,6 +90,7 @@ class PermissionsRequestDescriptor extends MessageDescriptor {
 }
 
 /// A [MessageDescriptor] for a [PermissionsGrantMessage]
+@JsonSerializable()
 class PermissionsGrantDescriptor extends MessageDescriptor {
   /// Constructor
   const PermissionsGrantDescriptor({
@@ -82,6 +112,14 @@ class PermissionsGrantDescriptor extends MessageDescriptor {
           dataCid: dataCid,
           dataFormat: dataFormat,
         );
+
+  /// Deserialize object from JSON
+  factory PermissionsGrantDescriptor.fromJson(
+          final Map<String, dynamic> json) =>
+      _$PermissionsGrantDescriptorFromJson(json);
+
+  /// Serialize object to JSON
+  Map<String, dynamic> toJson() => _$PermissionsGrantDescriptorToJson(this);
 
   /// A UUIDv4 String representing the reply object.
   final String permissionGrantId;
@@ -112,12 +150,20 @@ class PermissionsGrantDescriptor extends MessageDescriptor {
 }
 
 /// The scope of the PermissionsMessage.
+@JsonSerializable()
 class PermissionScope {
   /// Create the PermissionScope.
   const PermissionScope({
     required this.method,
     this.schema,
   });
+
+  /// Deserialize object from JSON
+  factory PermissionScope.fromJson(final Map<String, dynamic> json) =>
+      _$PermissionScopeFromJson(json);
+
+  /// Serialize object to JSON
+  Map<String, dynamic> toJson() => _$PermissionScopeToJson(this);
 
   /// The interface method the requesting party wants to invoke.
   final String method;
@@ -127,6 +173,7 @@ class PermissionScope {
 }
 
 /// Represents the signing conditions of the object.
+@JsonEnum()
 enum PermissionAttestation {
   /// The object MUST NOT be signed
   prohibited,
@@ -139,6 +186,7 @@ enum PermissionAttestation {
 }
 
 /// Represents the encryption conditions of the object.
+@JsonEnum()
 enum PermissionEncryption {
   /// The object MAY be encrypted using the key provided by the owner of a Decentralized Web Node
   optional,
@@ -148,6 +196,7 @@ enum PermissionEncryption {
 }
 
 /// Describes the conditions of the permission message
+@JsonSerializable()
 class PermissionConditions {
   /// Creates the PermissionCondition object
   const PermissionConditions({
@@ -157,6 +206,13 @@ class PermissionConditions {
     this.publication,
     this.sharedAccess,
   });
+
+  /// Deserialize object from JSON
+  factory PermissionConditions.fromJson(final Map<String, dynamic> json) =>
+      _$PermissionConditionsFromJson(json);
+
+  /// Serialize object to JSON
+  Map<String, dynamic> toJson() => _$PermissionConditionsToJson(this);
 
   /// The signing conditions of the the object.
   final PermissionAttestation? attestation;

@@ -37,7 +37,7 @@ MessageDescriptor _$MessageDescriptorFromJson(Map<String, dynamic> json) =>
       method: json['method'] as String,
       dataCid: json['dataCid'] == null
           ? null
-          : CID.fromJson(json['dataCid'] as String),
+          : CID.fromJson(json['dataCid'] as Map<String, dynamic>),
       dataFormat: json['dataFormat'] as String?,
     );
 
