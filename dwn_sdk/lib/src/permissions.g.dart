@@ -46,7 +46,7 @@ PermissionsRequestDescriptor _$PermissionsRequestDescriptorFromJson(
       scope: PermissionScope.fromJson(json['scope'] as Map<String, dynamic>),
       dataCid: json['dataCid'] == null
           ? null
-          : CID.fromJson(json['dataCid'] as Map<String, dynamic>),
+          : CID.fromJson(json['dataCid'] as String),
       dataFormat: json['dataFormat'] as String?,
       permissionRequestId: json['permissionRequestId'] as String?,
       conditions: json['conditions'] == null
@@ -81,7 +81,7 @@ PermissionsGrantDescriptor _$PermissionsGrantDescriptorFromJson(
       scope: PermissionScope.fromJson(json['scope'] as Map<String, dynamic>),
       dataCid: json['dataCid'] == null
           ? null
-          : CID.fromJson(json['dataCid'] as Map<String, dynamic>),
+          : CID.fromJson(json['dataCid'] as String),
       dataFormat: json['dataFormat'] as String?,
       permissionRequestId: json['permissionRequestId'] as String?,
       delegatedFrom: json['delegatedFrom'] as String?,

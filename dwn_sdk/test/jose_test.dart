@@ -1,11 +1,12 @@
-import 'package:dwn_sdk/dwn_sdk.dart';
+import 'package:dwn_sdk/src/jose.dart';
+import 'package:jose/jose.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('JWE', () {
     group('Example JWE Using General JWE JSON Serialization (RFC7516)', () {
-      final List<JWK> keys = <JWK>[
-        JWK.fromJson(
+      final List<JsonWebKey> keys = <JsonWebKey>[
+        JsonWebKey.fromJson(
           <String, dynamic>{
             'kty': 'RSA',
             'kid': '2011-04-29',
@@ -39,7 +40,7 @@ void main() {
                 'B9nNTwMVvH3VRRSLWACvPnSiwP8N5Usy-WRXS-V7TbpxIhvepTfE0NNo'
           },
         ),
-        JWK.fromJson(<String, dynamic>{
+        JsonWebKey.fromJson(<String, dynamic>{
           'kty': 'oct',
           'k': 'GawgguFyGrWKav7AX4VKUg',
           'kid': '7'
@@ -73,16 +74,16 @@ void main() {
       });
 
       test('Decrypt using key 1', () async {
-        final JWKStore keyStore = JWKStore()..addKey(keys[0]);
+        final JsonWebKeyStore keyStore = JsonWebKeyStore()..addKey(keys[0]);
 
-        final JosePayload payload = await jwe.getPayload(keyStore);
+        final JosePayload payload = await jwe.jwe.getPayload(keyStore);
         expect(payload.stringContent, 'Live long and prosper.');
       });
 
       test('Decrypt using key 2', () async {
-        final JWKStore keyStore = JWKStore()..addKey(keys[1]);
+        final JsonWebKeyStore keyStore = JsonWebKeyStore()..addKey(keys[1]);
 
-        final JosePayload payload = await jwe.getPayload(keyStore);
+        final JosePayload payload = await jwe.jwe.getPayload(keyStore);
         expect(payload.stringContent, 'Live long and prosper.');
       });
     });
@@ -122,8 +123,8 @@ void main() {
 
   group('JWS', () {
     group('Example JWS Using General JWS JSON Serialization (RFC7515)', () {
-      final List<JWK> keys = <JWK>[
-        JWK.fromJson(<String, dynamic>{
+      final List<JsonWebKey> keys = <JsonWebKey>[
+        JsonWebKey.fromJson(<String, dynamic>{
           'kty': 'RSA',
           'kid': '2010-12-29',
           'n': 'ofgWCuLjybRlzo0tZWJjNiuSfb4p4fAkd_wWJcyQoTbji9k0l8W26mPddx'
@@ -155,7 +156,7 @@ void main() {
               'y26F0EmpScGLq2MowX7fhd_QJQ3ydy5cY7YIBi87w93IKLEdfnbJtoOPLU'
               'W0ITrJReOgo1cq9SbsxYawBgfp_gh6A5603k2-ZQwVK0JKSHuLFkuQ3U'
         }),
-        JWK.fromJson(<String, dynamic>{
+        JsonWebKey.fromJson(<String, dynamic>{
           'kid': 'e9bc097a-ce51-4036-9562-d2ade882db0d',
           'kty': 'EC',
           'crv': 'P-256',
@@ -193,9 +194,9 @@ void main() {
       });
 
       test('Verify using key 1', () async {
-        final JWKStore keyStore = JWKStore()..addKey(keys[0]);
+        final JsonWebKeyStore keyStore = JsonWebKeyStore()..addKey(keys[0]);
 
-        final JosePayload payload = await jws.getPayload(keyStore);
+        final JosePayload payload = await jws.jws.getPayload(keyStore);
         expect(
           payload.stringContent,
           '{"iss":"joe",\r\n "exp":1300819380,\r\n "http://example.com/is_root":true}',
@@ -203,9 +204,9 @@ void main() {
       });
 
       test('Verify using key 2', () async {
-        final JWKStore keyStore = JWKStore()..addKey(keys[1]);
+        final JsonWebKeyStore keyStore = JsonWebKeyStore()..addKey(keys[1]);
 
-        final JosePayload payload = await jws.getPayload(keyStore);
+        final JosePayload payload = await jws.jws.getPayload(keyStore);
         expect(
           payload.stringContent,
           '{"iss":"joe",\r\n "exp":1300819380,\r\n "http://example.com/is_root":true}',

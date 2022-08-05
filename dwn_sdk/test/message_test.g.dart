@@ -1,0 +1,73 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'message_test.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+TestMessage _$TestMessageFromJson(Map<String, dynamic> json) => TestMessage(
+      data: json['data'] == null ? null : MessageData.fromJson(json['data']),
+      descriptor: MessageDescriptor.fromJson(
+          json['descriptor'] as Map<String, dynamic>),
+      authorization: json['authorization'] == null
+          ? null
+          : MessageAuthorization.fromJson(JsonWebSignature.fromJson(
+              json['authorization'] as Map<String, dynamic>)),
+      attestation: json['attestation'] == null
+          ? null
+          : MessageAttestation.fromJson(JsonWebSignature.fromJson(
+              json['attestation'] as Map<String, dynamic>)),
+    );
+
+Map<String, dynamic> _$TestMessageToJson(TestMessage instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'descriptor': instance.descriptor,
+      'authorization': instance.authorization,
+      'attestation': instance.attestation,
+    };
+
+Test2Message _$Test2MessageFromJson(Map<String, dynamic> json) => Test2Message(
+      data: json['data'] == null ? null : MessageData.fromJson(json['data']),
+      descriptor: Test2MessageDescriptor.fromJson(
+          json['descriptor'] as Map<String, dynamic>),
+      authorization: json['authorization'] == null
+          ? null
+          : MessageAuthorization.fromJson(JsonWebSignature.fromJson(
+              json['authorization'] as Map<String, dynamic>)),
+      attestation: json['attestation'] == null
+          ? null
+          : MessageAttestation.fromJson(JsonWebSignature.fromJson(
+              json['attestation'] as Map<String, dynamic>)),
+    );
+
+Map<String, dynamic> _$Test2MessageToJson(Test2Message instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'descriptor': instance.descriptor,
+      'authorization': instance.authorization,
+      'attestation': instance.attestation,
+    };
+
+Test2MessageDescriptor _$Test2MessageDescriptorFromJson(
+        Map<String, dynamic> json) =>
+    Test2MessageDescriptor(
+      nonce: json['nonce'] as String,
+      method: json['method'] as String,
+      dataCid: json['dataCid'] == null
+          ? null
+          : CID.fromJson(json['dataCid'] as String),
+      dataFormat: json['dataFormat'] as String?,
+      testParameter: json['testParameter'] as String,
+    );
+
+Map<String, dynamic> _$Test2MessageDescriptorToJson(
+        Test2MessageDescriptor instance) =>
+    <String, dynamic>{
+      'nonce': instance.nonce,
+      'method': instance.method,
+      'dataCid': instance.dataCid,
+      'dataFormat': instance.dataFormat,
+      'testParameter': instance.testParameter,
+    };

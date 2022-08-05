@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:dwn_sdk/src/did/did_resolver.dart';
-import 'package:test/test.dart';
 
+import 'package:dwn_sdk/src/did/did_resolver.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
+import 'package:test/test.dart';
 
 void main() {
   // Testing the DIDDocumentMetadata structure
@@ -354,8 +354,10 @@ void main() {
 
   group('DIDResolver', () {
     test('Cannot have useRemote without useUrl', () {
-      expect(() => DIDResolver(<DIDMethodResolver>[], useRemote: true),
-          throwsArgumentError);
+      expect(
+        () => DIDResolver(<DIDMethodResolver>[], useRemote: true),
+        throwsArgumentError,
+      );
     });
 
     test('Universal Resolver returns valid DID', () async {
@@ -366,13 +368,18 @@ void main() {
           fail('Wrong endpoint');
         }
         return http.Response(
-            '{"context":["https://www.w3.org/ns/did/v1"],"didResolutionMetadata":{"contentType":"did+json","error":null},"didDocument":{"context":["https://www.w3.org/ns/did/v1"],"id":"did:example:123456789abcdefghi","alsoKnownAs":"dave","controller":["did:example:123456789abcdefghi"],"verificationMethod":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"service":[{"id":"did:example:123456789abcdefghi#key-1","type":"url","serviceEndpoint":"https://datahouse.me","description":"Health Data Store"}],"authentication":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"keyAgreement":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"capabilityInvocation":[],"capabilityDelegation":[]},"didDocumentMetadata":{"created":"2022-08-02T08:45:21+0000","updated":"2022-08-02T08:45:21+0000","deactivated":false,"versionId":"1.1","nextUpdate":null,"nextVersionId":null,"equivalentId":null,"canonicalId":null}}',
-            200,
-            headers: {'content-type': 'application/json'});
+          '{"context":["https://www.w3.org/ns/did/v1"],"didResolutionMetadata":{"contentType":"did+json","error":null},"didDocument":{"context":["https://www.w3.org/ns/did/v1"],"id":"did:example:123456789abcdefghi","alsoKnownAs":"dave","controller":["did:example:123456789abcdefghi"],"verificationMethod":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"service":[{"id":"did:example:123456789abcdefghi#key-1","type":"url","serviceEndpoint":"https://datahouse.me","description":"Health Data Store"}],"authentication":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"keyAgreement":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"capabilityInvocation":[],"capabilityDelegation":[]},"didDocumentMetadata":{"created":"2022-08-02T08:45:21+0000","updated":"2022-08-02T08:45:21+0000","deactivated":false,"versionId":"1.1","nextUpdate":null,"nextVersionId":null,"equivalentId":null,"canonicalId":null}}',
+          200,
+          headers: {'content-type': 'application/json'},
+        );
       });
 
-      final DIDResolver resolver = DIDResolver(<DIDMethodResolver>[],
-          useRemote: true, remoteUrl: 'https://datahouse.me', client: client);
+      final DIDResolver resolver = DIDResolver(
+        <DIDMethodResolver>[],
+        useRemote: true,
+        remoteUrl: 'https://datahouse.me',
+        client: client,
+      );
       final DIDResolutionResult result =
           await resolver.resolve('did:example:123456789abcdefghi');
 

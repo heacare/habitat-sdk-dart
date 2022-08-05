@@ -1,9 +1,7 @@
-import 'dart:typed_data';
-
 import 'package:json_annotation/json_annotation.dart';
 
-import './cid.dart';
-import './message.dart';
+import 'cid.dart';
+import 'message.dart';
 
 part 'permissions.g.dart';
 
@@ -12,9 +10,9 @@ part 'permissions.g.dart';
 class PermissionsRequestMessage extends Message {
   /// Constructs a new PermissionsRequest message
   PermissionsRequestMessage({
-    final MessageData? data,
-    required final PermissionsRequestDescriptor descriptor,
-  }) : super(descriptor: descriptor, data: data);
+    super.data,
+    required PermissionsRequestDescriptor super.descriptor,
+  });
 
   /// Deserialize object from JSON
   factory PermissionsRequestMessage.fromJson(final Map<String, dynamic> json) =>
@@ -29,9 +27,9 @@ class PermissionsRequestMessage extends Message {
 class PermissionsGrantMessage extends Message {
   /// Constructs a new PermissionsGrant message
   PermissionsGrantMessage({
-    final MessageData? data,
-    required final PermissionsGrantDescriptor descriptor,
-  }) : super(descriptor: descriptor, data: data);
+    super.data,
+    required PermissionsGrantDescriptor super.descriptor,
+  });
 
   /// Deserialize object from JSON
   factory PermissionsGrantMessage.fromJson(final Map<String, dynamic> json) =>
@@ -46,28 +44,27 @@ class PermissionsGrantMessage extends Message {
 class PermissionsRequestDescriptor extends MessageDescriptor {
   /// Constructor
   const PermissionsRequestDescriptor({
-    required final String nonce,
+    required super.nonce,
     required this.grantedBy,
     required this.description,
     required this.grantedTo,
     required this.scope,
-    final CID? dataCid,
-    final String? dataFormat,
+    super.dataCid,
+    super.dataFormat,
     this.permissionRequestId,
     this.conditions,
   }) : super(
-          nonce: nonce,
           method: 'PermissionsGrant',
-          dataCid: dataCid,
-          dataFormat: dataFormat,
         );
 
   /// Deserialize object from JSON
   factory PermissionsRequestDescriptor.fromJson(
-          final Map<String, dynamic> json) =>
+    final Map<String, dynamic> json,
+  ) =>
       _$PermissionsRequestDescriptorFromJson(json);
 
   /// Serialize object to JSON
+  @override
   Map<String, dynamic> toJson() => _$PermissionsRequestDescriptorToJson(this);
 
   /// A UUIDv4 String representing the PermissionRequest object the permission is being granted in relation to.
@@ -94,31 +91,30 @@ class PermissionsRequestDescriptor extends MessageDescriptor {
 class PermissionsGrantDescriptor extends MessageDescriptor {
   /// Constructor
   const PermissionsGrantDescriptor({
-    required final String nonce,
+    required super.nonce,
     required this.permissionGrantId,
     required this.grantedBy,
     required this.description,
     required this.grantedTo,
     required this.expiry,
     required this.scope,
-    final CID? dataCid,
-    final String? dataFormat,
+    super.dataCid,
+    super.dataFormat,
     this.permissionRequestId,
     this.delegatedFrom,
     this.conditions,
   }) : super(
-          nonce: nonce,
           method: 'PermissionsGrant',
-          dataCid: dataCid,
-          dataFormat: dataFormat,
         );
 
   /// Deserialize object from JSON
   factory PermissionsGrantDescriptor.fromJson(
-          final Map<String, dynamic> json) =>
+    final Map<String, dynamic> json,
+  ) =>
       _$PermissionsGrantDescriptorFromJson(json);
 
   /// Serialize object to JSON
+  @override
   Map<String, dynamic> toJson() => _$PermissionsGrantDescriptorToJson(this);
 
   /// A UUIDv4 String representing the reply object.

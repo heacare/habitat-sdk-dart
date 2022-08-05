@@ -1,4 +1,9 @@
+/// The base message types provide basic facilities for encryption, signing,
+/// authorization and basic descriptor information.
+///
+/// Messages are expected to subclass these types and
 import 'dart:typed_data';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'cid.dart';
@@ -10,7 +15,6 @@ part 'message.g.dart';
 /// All DWN messaging is transacted via Message objects.
 ///
 /// See https://identity.foundation/decentralized-web-node/spec/#messages
-@JsonSerializable()
 abstract class Message {
   /// Constructs a new message.
   Message({
@@ -33,42 +37,47 @@ abstract class Message {
   final MessageAttestation? attestation;
 }
 
-/// The message data. May be encrypted
+/// The message data. May be encrypted.
 class MessageData {
-	/// Constructs a message data wrapper
-	MessageData({
-		this.data,
-		this.encryptedData,
-	}) : assert(data == null || encryptedData == null, 'message data can only be encrypted or unencrypted');
+  /// Constructs a message data wrapper.
+  MessageData({
+    this.data,
+    this.encryptedData,
+  }) : assert(
+          data == null || encryptedData == null,
+          'message data can only be encrypted or unencrypted',
+        );
 
   /// Constructs a JWE from a flattened or general JSON representation.
-  factory MessageData.fromJson(final dynamic json)	{
-	if (json is String) {
-		return MessageData(data: _base64UrlConverter.fromJson(json));
-	}
-	if (json is Map<String, dynamic>) {
-		return MessageData(encryptedData: JWE.fromJson(json));
-	}
-	throw const FormatException("message data is not a string or object");
+  factory MessageData.fromJson(final dynamic json) {
+    if (json is String) {
+      return MessageData(data: _base64UrlConverter.fromJson(json));
+    }
+    if (json is Map<String, dynamic>) {
+      return MessageData(encryptedData: JWE.fromJson(json));
+    }
+    throw const FormatException('message data is not a string or object');
   }
 
- /// Unencrypted message data
+  /// Unencrypted message data.
   final Uint8List? data;
-  /// Encrypted message data
+
+  /// Encrypted message data.
   final JWE? encryptedData;
 
-  static const JsonBase64UrlConverter _base64UrlConverter = JsonBase64UrlConverter();
+  static const JsonBase64UrlConverter _base64UrlConverter =
+      JsonBase64UrlConverter();
 
-  /// Returns a JSON string when data is unencrypted, otherwise return the 
+  /// Returns a JSON string when data is unencrypted, otherwise return the
   /// general representation of the JWE.
   dynamic toJson() {
-	if (data != null) {
-		return _base64UrlConverter.toJson(data!);
-	}
-	if (encryptedData != null) {
-		return encryptedData!.toJson();
-	}
-}
+    if (data != null) {
+      return _base64UrlConverter.toJson(data!);
+    }
+    if (encryptedData != null) {
+      return encryptedData!.toJson();
+    }
+  }
 }
 
 /// Information about a message.
@@ -84,6 +93,10 @@ class MessageDescriptor {
     this.dataFormat,
   });
 
+  /// Construct a message descriptor from JSON.
+  factory MessageDescriptor.fromJson(final Map<String, dynamic> json) =>
+      _$MessageDescriptorFromJson(json);
+
   /// Cryptographically random string that ensures each object is unique.
   final String nonce;
 
@@ -95,6 +108,9 @@ class MessageDescriptor {
 
   /// If the message is associated with data, this must correspond to a registered IANA Media Type, or the other stings pending registration as specified in DWN.
   final String? dataFormat;
+
+  /// Convert a message descriptor to JSON.
+  Map<String, dynamic> toJson() => _$MessageDescriptorToJson(this);
 }
 
 /// Some messages may require authorization material for processing them.
