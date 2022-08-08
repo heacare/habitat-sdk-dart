@@ -7,36 +7,30 @@ part 'permissions.g.dart';
 
 /// A message to request permissions
 @JsonSerializable()
-class PermissionsRequestMessage extends Message {
+class PermissionsRequestMessage extends Message<PermissionsRequestDescriptor> {
   /// Constructs a new PermissionsRequest message
   PermissionsRequestMessage({
-    super.data,
-    required PermissionsRequestDescriptor super.descriptor,
+    final super.data,
+    required final super.descriptor,
   });
 
   /// Deserialize object from JSON
   factory PermissionsRequestMessage.fromJson(final Map<String, dynamic> json) =>
       _$PermissionsRequestMessageFromJson(json);
-
-  /// Serialize object to JSON
-  Map<String, dynamic> toJson() => _$PermissionsRequestMessageToJson(this);
 }
 
 /// A message to grant permissions
 @JsonSerializable()
-class PermissionsGrantMessage extends Message {
+class PermissionsGrantMessage extends Message<PermissionsGrantDescriptor> {
   /// Constructs a new PermissionsGrant message
   PermissionsGrantMessage({
-    super.data,
-    required PermissionsGrantDescriptor super.descriptor,
+    final super.data,
+    required final super.descriptor,
   });
 
   /// Deserialize object from JSON
   factory PermissionsGrantMessage.fromJson(final Map<String, dynamic> json) =>
       _$PermissionsGrantMessageFromJson(json);
-
-  /// Serialize object to JSON
-  Map<String, dynamic> toJson() => _$PermissionsGrantMessageToJson(this);
 }
 
 /// A [MessageDescriptor] for a [PermissionsRequestMessage]
@@ -44,13 +38,13 @@ class PermissionsGrantMessage extends Message {
 class PermissionsRequestDescriptor extends MessageDescriptor {
   /// Constructor
   const PermissionsRequestDescriptor({
-    required super.nonce,
+    required final super.nonce,
+    final super.dataCid,
+    final super.dataFormat,
     required this.grantedBy,
     required this.description,
     required this.grantedTo,
     required this.scope,
-    super.dataCid,
-    super.dataFormat,
     this.permissionRequestId,
     this.conditions,
   }) : super(
@@ -91,15 +85,15 @@ class PermissionsRequestDescriptor extends MessageDescriptor {
 class PermissionsGrantDescriptor extends MessageDescriptor {
   /// Constructor
   const PermissionsGrantDescriptor({
-    required super.nonce,
+    required final super.nonce,
+    final super.dataCid,
+    final super.dataFormat,
     required this.permissionGrantId,
     required this.grantedBy,
     required this.description,
     required this.grantedTo,
     required this.expiry,
     required this.scope,
-    super.dataCid,
-    super.dataFormat,
     this.permissionRequestId,
     this.delegatedFrom,
     this.conditions,

@@ -1,7 +1,8 @@
 /// The base message types provide basic facilities for encryption, signing,
 /// authorization and basic descriptor information.
 ///
-/// Messages are expected to subclass these types and
+/// Messages with additional descriptor are expected to subclass
+/// MessageDescriptor and be JSON serializable as well.
 import 'dart:typed_data';
 
 import 'package:json_annotation/json_annotation.dart';
@@ -12,35 +13,64 @@ import 'utils/json_converter.dart';
 
 part 'message.g.dart';
 
+/// Builder for a message descriptor from a descriptor JSON object.
+typedef MessageDescriptorBuilder<D> = D Function(Map<String, dynamic> json);
+
 /// All DWN messaging is transacted via Message objects.
 ///
 /// See https://identity.foundation/decentralized-web-node/spec/#messages
-abstract class Message {
+@JsonSerializable(genericArgumentFactories: true)
+class Message<D extends MessageDescriptor> {
   /// Constructs a new message.
   Message({
     this.data,
     required this.descriptor,
     this.authorization,
     this.attestation,
-  });
+  })  : assert(
+          data == null || descriptor.dataFormat != null,
+          'descriptor must have a dataFormat',
+        ),
+        assert(
+          data == null || descriptor.dataCid != null,
+          'descriptor must have a dataCid',
+        );
 
-  /// The raw message data in bytes.
+  /// Constructs a message from a flattened or general JSON representation.
+  ///
+  /// Pass in a builder for the descriptor.
+  factory Message.fromJson(
+    final Map<String, dynamic> json,
+    final MessageDescriptorBuilder<D> descriptorBuilder,
+  ) =>
+      _$MessageFromJson<D>(json, (final Object? json) {
+        if (json is Map<String, dynamic>) {
+          return descriptorBuilder(json);
+        }
+        throw const FormatException('message descriptor must be an object');
+      });
+
+  /// Optional message data, encrypted or unencrypted.
   final MessageData? data;
 
   /// A descriptor object describing the message.
-  final MessageDescriptor descriptor;
+  final D descriptor;
 
   /// Optional authorization for the message.
   final MessageAuthorization? authorization;
 
   /// Optional attestation for the message.
   final MessageAttestation? attestation;
+
+  /// Returns the JSON representation of the message.
+  Map<String, dynamic> toJson() =>
+      _$MessageToJson(this, (final D object) => object.toJson());
 }
 
 /// The message data. May be encrypted.
 class MessageData {
   /// Constructs a message data wrapper.
-  MessageData({
+  const MessageData({
     this.data,
     this.encryptedData,
   }) : assert(

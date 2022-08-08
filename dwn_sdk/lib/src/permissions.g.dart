@@ -40,14 +40,14 @@ PermissionsRequestDescriptor _$PermissionsRequestDescriptorFromJson(
         Map<String, dynamic> json) =>
     PermissionsRequestDescriptor(
       nonce: json['nonce'] as String,
-      grantedBy: json['grantedBy'] as String,
-      description: json['description'] as String,
-      grantedTo: json['grantedTo'] as String,
-      scope: PermissionScope.fromJson(json['scope'] as Map<String, dynamic>),
       dataCid: json['dataCid'] == null
           ? null
           : CID.fromJson(json['dataCid'] as String),
       dataFormat: json['dataFormat'] as String?,
+      grantedBy: json['grantedBy'] as String,
+      description: json['description'] as String,
+      grantedTo: json['grantedTo'] as String,
+      scope: PermissionScope.fromJson(json['scope'] as Map<String, dynamic>),
       permissionRequestId: json['permissionRequestId'] as String?,
       conditions: json['conditions'] == null
           ? null
@@ -73,16 +73,16 @@ PermissionsGrantDescriptor _$PermissionsGrantDescriptorFromJson(
         Map<String, dynamic> json) =>
     PermissionsGrantDescriptor(
       nonce: json['nonce'] as String,
+      dataCid: json['dataCid'] == null
+          ? null
+          : CID.fromJson(json['dataCid'] as String),
+      dataFormat: json['dataFormat'] as String?,
       permissionGrantId: json['permissionGrantId'] as String,
       grantedBy: json['grantedBy'] as String,
       description: json['description'] as String,
       grantedTo: json['grantedTo'] as String,
       expiry: json['expiry'] as String,
       scope: PermissionScope.fromJson(json['scope'] as Map<String, dynamic>),
-      dataCid: json['dataCid'] == null
-          ? null
-          : CID.fromJson(json['dataCid'] as String),
-      dataFormat: json['dataFormat'] as String?,
       permissionRequestId: json['permissionRequestId'] as String?,
       delegatedFrom: json['delegatedFrom'] as String?,
       conditions: json['conditions'] == null

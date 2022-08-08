@@ -95,8 +95,7 @@ void main() {
           jsonDecode(jsonString) as Map<String, dynamic>;
       final PermissionsRequestMessage message =
           PermissionsRequestMessage.fromJson(jsonMap);
-      final PermissionsRequestDescriptor md =
-          message.descriptor as PermissionsRequestDescriptor;
+      final PermissionsRequestDescriptor md = message.descriptor;
 
       // Checking message
       // Pew pew
@@ -112,7 +111,9 @@ void main() {
       expect(md.scope.schema, equals('https://schema.org/HealthData'));
 
       expect(
-          md.conditions!.attestation, equals(PermissionAttestation.optional));
+        md.conditions!.attestation,
+        equals(PermissionAttestation.optional),
+      );
       expect(md.conditions!.encryption, equals(PermissionEncryption.optional));
       expect(md.conditions!.delegation, isTrue);
       expect(md.conditions!.publication, isNull);
@@ -218,8 +219,7 @@ void main() {
           jsonDecode(jsonString) as Map<String, dynamic>;
       final PermissionsGrantMessage message =
           PermissionsGrantMessage.fromJson(jsonMap);
-      final PermissionsGrantDescriptor md =
-          message.descriptor as PermissionsGrantDescriptor;
+      final PermissionsGrantDescriptor md = message.descriptor;
 
       // Checking message
       // Pew pew

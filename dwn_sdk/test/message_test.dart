@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 part 'message_test.g.dart';
 
 @JsonSerializable()
-class TestMessage extends Message {
+class TestMessage extends Message<MessageDescriptor> {
   TestMessage({
     final super.data,
     required final super.descriptor,
@@ -17,29 +17,27 @@ class TestMessage extends Message {
   });
   factory TestMessage.fromJson(final Map<String, dynamic> json) =>
       _$TestMessageFromJson(json);
-  Map<String, dynamic> toJson() => _$TestMessageToJson(this);
 }
 
 @JsonSerializable()
-class Test2Message extends Message {
+class Test2Message extends Message<Test2MessageDescriptor> {
   Test2Message({
     final super.data,
-    required final Test2MessageDescriptor super.descriptor,
+    required final super.descriptor,
     final super.authorization,
     final super.attestation,
   });
   factory Test2Message.fromJson(final Map<String, dynamic> json) =>
       _$Test2MessageFromJson(json);
-  Map<String, dynamic> toJson() => _$Test2MessageToJson(this);
 }
 
 @JsonSerializable()
 class Test2MessageDescriptor extends MessageDescriptor {
   Test2MessageDescriptor({
-    required super.nonce,
-    required super.method,
-    super.dataCid,
-    super.dataFormat,
+    required final super.nonce,
+    required final super.method,
+    final super.dataCid,
+    final super.dataFormat,
     required this.testParameter,
   });
   factory Test2MessageDescriptor.fromJson(final Map<String, dynamic> json) =>
@@ -68,6 +66,8 @@ void main() {
       );
       expect(t.descriptor.dataFormat, isNull);
       expect(t.data, isNull);
+
+      expect(t.toJson(), isNotEmpty);
     });
     test('Parse advanced message from JSON', () {
       final Test2Message t = Test2Message.fromJson(<String, dynamic>{
@@ -92,6 +92,12 @@ void main() {
           <int>[104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 33],
         ),
       );
+
+      final Map<String, dynamic> json = t.toJson();
+      expect(json['data'], 'aGVsbG8gd29ybGQh');
+      final Map<String, dynamic> jsonDescriptor =
+          json['descriptor'] as Map<String, dynamic>;
+      expect(jsonDescriptor['testParameter'], 'hello');
     });
   });
 }
