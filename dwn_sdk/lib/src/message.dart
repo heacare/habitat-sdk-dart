@@ -5,6 +5,7 @@
 /// MessageDescriptor and be JSON serializable as well.
 import 'dart:typed_data';
 
+import 'package:jose/jose.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'cid.dart';

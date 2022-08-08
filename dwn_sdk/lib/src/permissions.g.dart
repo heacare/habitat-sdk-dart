@@ -15,11 +15,19 @@ PermissionsRequestMessage _$PermissionsRequestMessageFromJson(
     );
 
 Map<String, dynamic> _$PermissionsRequestMessageToJson(
-        PermissionsRequestMessage instance) =>
-    <String, dynamic>{
-      'data': instance.data,
-      'descriptor': instance.descriptor,
-    };
+    PermissionsRequestMessage instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  val['descriptor'] = instance.descriptor;
+  return val;
+}
 
 PermissionsGrantMessage _$PermissionsGrantMessageFromJson(
         Map<String, dynamic> json) =>
@@ -30,11 +38,19 @@ PermissionsGrantMessage _$PermissionsGrantMessageFromJson(
     );
 
 Map<String, dynamic> _$PermissionsGrantMessageToJson(
-        PermissionsGrantMessage instance) =>
-    <String, dynamic>{
-      'data': instance.data,
-      'descriptor': instance.descriptor,
-    };
+    PermissionsGrantMessage instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  val['descriptor'] = instance.descriptor;
+  return val;
+}
 
 PermissionsRequestDescriptor _$PermissionsRequestDescriptorFromJson(
         Map<String, dynamic> json) =>
@@ -56,18 +72,27 @@ PermissionsRequestDescriptor _$PermissionsRequestDescriptorFromJson(
     );
 
 Map<String, dynamic> _$PermissionsRequestDescriptorToJson(
-        PermissionsRequestDescriptor instance) =>
-    <String, dynamic>{
-      'nonce': instance.nonce,
-      'dataCid': instance.dataCid,
-      'dataFormat': instance.dataFormat,
-      'permissionRequestId': instance.permissionRequestId,
-      'description': instance.description,
-      'grantedBy': instance.grantedBy,
-      'grantedTo': instance.grantedTo,
-      'scope': instance.scope,
-      'conditions': instance.conditions,
-    };
+    PermissionsRequestDescriptor instance) {
+  final val = <String, dynamic>{
+    'nonce': instance.nonce,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('dataCid', instance.dataCid);
+  writeNotNull('dataFormat', instance.dataFormat);
+  writeNotNull('permissionRequestId', instance.permissionRequestId);
+  val['description'] = instance.description;
+  val['grantedBy'] = instance.grantedBy;
+  val['grantedTo'] = instance.grantedTo;
+  val['scope'] = instance.scope;
+  writeNotNull('conditions', instance.conditions);
+  return val;
+}
 
 PermissionsGrantDescriptor _$PermissionsGrantDescriptorFromJson(
         Map<String, dynamic> json) =>
@@ -92,21 +117,30 @@ PermissionsGrantDescriptor _$PermissionsGrantDescriptorFromJson(
     );
 
 Map<String, dynamic> _$PermissionsGrantDescriptorToJson(
-        PermissionsGrantDescriptor instance) =>
-    <String, dynamic>{
-      'nonce': instance.nonce,
-      'dataCid': instance.dataCid,
-      'dataFormat': instance.dataFormat,
-      'permissionGrantId': instance.permissionGrantId,
-      'permissionRequestId': instance.permissionRequestId,
-      'description': instance.description,
-      'grantedBy': instance.grantedBy,
-      'grantedTo': instance.grantedTo,
-      'delegatedFrom': instance.delegatedFrom,
-      'expiry': instance.expiry,
-      'scope': instance.scope,
-      'conditions': instance.conditions,
-    };
+    PermissionsGrantDescriptor instance) {
+  final val = <String, dynamic>{
+    'nonce': instance.nonce,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('dataCid', instance.dataCid);
+  writeNotNull('dataFormat', instance.dataFormat);
+  val['permissionGrantId'] = instance.permissionGrantId;
+  writeNotNull('permissionRequestId', instance.permissionRequestId);
+  val['description'] = instance.description;
+  val['grantedBy'] = instance.grantedBy;
+  val['grantedTo'] = instance.grantedTo;
+  writeNotNull('delegatedFrom', instance.delegatedFrom);
+  val['expiry'] = instance.expiry;
+  val['scope'] = instance.scope;
+  writeNotNull('conditions', instance.conditions);
+  return val;
+}
 
 PermissionScope _$PermissionScopeFromJson(Map<String, dynamic> json) =>
     PermissionScope(
@@ -114,11 +148,20 @@ PermissionScope _$PermissionScopeFromJson(Map<String, dynamic> json) =>
       schema: json['schema'] as String?,
     );
 
-Map<String, dynamic> _$PermissionScopeToJson(PermissionScope instance) =>
-    <String, dynamic>{
-      'method': instance.method,
-      'schema': instance.schema,
-    };
+Map<String, dynamic> _$PermissionScopeToJson(PermissionScope instance) {
+  final val = <String, dynamic>{
+    'method': instance.method,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('schema', instance.schema);
+  return val;
+}
 
 PermissionConditions _$PermissionConditionsFromJson(
         Map<String, dynamic> json) =>
@@ -133,14 +176,24 @@ PermissionConditions _$PermissionConditionsFromJson(
     );
 
 Map<String, dynamic> _$PermissionConditionsToJson(
-        PermissionConditions instance) =>
-    <String, dynamic>{
-      'attestation': _$PermissionAttestationEnumMap[instance.attestation],
-      'encryption': _$PermissionEncryptionEnumMap[instance.encryption],
-      'delegation': instance.delegation,
-      'publication': instance.publication,
-      'sharedAccess': instance.sharedAccess,
-    };
+    PermissionConditions instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'attestation', _$PermissionAttestationEnumMap[instance.attestation]);
+  writeNotNull(
+      'encryption', _$PermissionEncryptionEnumMap[instance.encryption]);
+  writeNotNull('delegation', instance.delegation);
+  writeNotNull('publication', instance.publication);
+  writeNotNull('sharedAccess', instance.sharedAccess);
+  return val;
+}
 
 const _$PermissionAttestationEnumMap = {
   PermissionAttestation.prohibited: 'prohibited',

@@ -23,14 +23,22 @@ DIDResolutionResult _$DIDResolutionResultFromJson(Map<String, dynamic> json) =>
               json['didDocumentMetadata'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$DIDResolutionResultToJson(
-        DIDResolutionResult instance) =>
-    <String, dynamic>{
-      'context': instance.context,
-      'didResolutionMetadata': instance.didResolutionMetadata,
-      'didDocument': instance.didDocument,
-      'didDocumentMetadata': instance.didDocumentMetadata,
-    };
+Map<String, dynamic> _$DIDResolutionResultToJson(DIDResolutionResult instance) {
+  final val = <String, dynamic>{
+    'context': instance.context,
+    'didResolutionMetadata': instance.didResolutionMetadata,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('didDocument', instance.didDocument);
+  writeNotNull('didDocumentMetadata', instance.didDocumentMetadata);
+  return val;
+}
 
 DIDResolutionMetadata _$DIDResolutionMetadataFromJson(
         Map<String, dynamic> json) =>
@@ -40,11 +48,19 @@ DIDResolutionMetadata _$DIDResolutionMetadataFromJson(
     );
 
 Map<String, dynamic> _$DIDResolutionMetadataToJson(
-        DIDResolutionMetadata instance) =>
-    <String, dynamic>{
-      'contentType': instance.contentType,
-      'error': _$DIDResolutionErrorEnumMap[instance.error],
-    };
+    DIDResolutionMetadata instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('contentType', instance.contentType);
+  writeNotNull('error', _$DIDResolutionErrorEnumMap[instance.error]);
+  return val;
+}
 
 const _$DIDResolutionErrorEnumMap = {
   DIDResolutionError.invalidDID: 'invalidDID',
@@ -95,19 +111,28 @@ DIDDocument _$DIDDocumentFromJson(Map<String, dynamic> json) => DIDDocument(
           const <VerificationMethod>[],
     );
 
-Map<String, dynamic> _$DIDDocumentToJson(DIDDocument instance) =>
-    <String, dynamic>{
-      'context': instance.context,
-      'id': instance.id,
-      'alsoKnownAs': instance.alsoKnownAs,
-      'controller': instance.controller,
-      'verificationMethod': instance.verificationMethod,
-      'service': instance.service,
-      'authentication': instance.authentication,
-      'keyAgreement': instance.keyAgreement,
-      'capabilityInvocation': instance.capabilityInvocation,
-      'capabilityDelegation': instance.capabilityDelegation,
-    };
+Map<String, dynamic> _$DIDDocumentToJson(DIDDocument instance) {
+  final val = <String, dynamic>{
+    'context': instance.context,
+    'id': instance.id,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('alsoKnownAs', instance.alsoKnownAs);
+  val['controller'] = instance.controller;
+  val['verificationMethod'] = instance.verificationMethod;
+  val['service'] = instance.service;
+  val['authentication'] = instance.authentication;
+  val['keyAgreement'] = instance.keyAgreement;
+  val['capabilityInvocation'] = instance.capabilityInvocation;
+  val['capabilityDelegation'] = instance.capabilityDelegation;
+  return val;
+}
 
 ServiceEndpoint _$ServiceEndpointFromJson(Map<String, dynamic> json) =>
     ServiceEndpoint(
@@ -117,13 +142,21 @@ ServiceEndpoint _$ServiceEndpointFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String?,
     );
 
-Map<String, dynamic> _$ServiceEndpointToJson(ServiceEndpoint instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'type': instance.type,
-      'serviceEndpoint': instance.serviceEndpoint,
-      'description': instance.description,
-    };
+Map<String, dynamic> _$ServiceEndpointToJson(ServiceEndpoint instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('type', instance.type);
+  writeNotNull('serviceEndpoint', instance.serviceEndpoint);
+  writeNotNull('description', instance.description);
+  return val;
+}
 
 VerificationMethod _$VerificationMethodFromJson(Map<String, dynamic> json) =>
     VerificationMethod(
@@ -134,14 +167,22 @@ VerificationMethod _$VerificationMethodFromJson(Map<String, dynamic> json) =>
       publicKeyMultibase: json['publicKeyMultibase'] as String?,
     );
 
-Map<String, dynamic> _$VerificationMethodToJson(VerificationMethod instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'type': instance.type,
-      'controller': instance.controller,
-      'publicKeyJwk': instance.publicKeyJwk,
-      'publicKeyMultibase': instance.publicKeyMultibase,
-    };
+Map<String, dynamic> _$VerificationMethodToJson(VerificationMethod instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('type', instance.type);
+  writeNotNull('controller', instance.controller);
+  writeNotNull('publicKeyJwk', instance.publicKeyJwk);
+  writeNotNull('publicKeyMultibase', instance.publicKeyMultibase);
+  return val;
+}
 
 DIDDocumentMetadata _$DIDDocumentMetadataFromJson(Map<String, dynamic> json) =>
     DIDDocumentMetadata(
@@ -155,15 +196,22 @@ DIDDocumentMetadata _$DIDDocumentMetadataFromJson(Map<String, dynamic> json) =>
       canonicalId: json['canonicalId'] as String?,
     );
 
-Map<String, dynamic> _$DIDDocumentMetadataToJson(
-        DIDDocumentMetadata instance) =>
-    <String, dynamic>{
-      'created': instance.created,
-      'updated': instance.updated,
-      'deactivated': instance.deactivated,
-      'versionId': instance.versionId,
-      'nextUpdate': instance.nextUpdate,
-      'nextVersionId': instance.nextVersionId,
-      'equivalentId': instance.equivalentId,
-      'canonicalId': instance.canonicalId,
-    };
+Map<String, dynamic> _$DIDDocumentMetadataToJson(DIDDocumentMetadata instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('created', instance.created);
+  writeNotNull('updated', instance.updated);
+  writeNotNull('deactivated', instance.deactivated);
+  writeNotNull('versionId', instance.versionId);
+  writeNotNull('nextUpdate', instance.nextUpdate);
+  writeNotNull('nextVersionId', instance.nextVersionId);
+  writeNotNull('equivalentId', instance.equivalentId);
+  writeNotNull('canonicalId', instance.canonicalId);
+  return val;
+}

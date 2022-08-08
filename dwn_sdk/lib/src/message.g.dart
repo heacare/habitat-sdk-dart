@@ -26,13 +26,21 @@ Message<D> _$MessageFromJson<D extends MessageDescriptor>(
 Map<String, dynamic> _$MessageToJson<D extends MessageDescriptor>(
   Message<D> instance,
   Object? Function(D value) toJsonD,
-) =>
-    <String, dynamic>{
-      'data': instance.data,
-      'descriptor': toJsonD(instance.descriptor),
-      'authorization': instance.authorization,
-      'attestation': instance.attestation,
-    };
+) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  val['descriptor'] = toJsonD(instance.descriptor);
+  writeNotNull('authorization', instance.authorization);
+  writeNotNull('attestation', instance.attestation);
+  return val;
+}
 
 MessageDescriptor _$MessageDescriptorFromJson(Map<String, dynamic> json) =>
     MessageDescriptor(
@@ -44,10 +52,19 @@ MessageDescriptor _$MessageDescriptorFromJson(Map<String, dynamic> json) =>
       dataFormat: json['dataFormat'] as String?,
     );
 
-Map<String, dynamic> _$MessageDescriptorToJson(MessageDescriptor instance) =>
-    <String, dynamic>{
-      'nonce': instance.nonce,
-      'method': instance.method,
-      'dataCid': instance.dataCid,
-      'dataFormat': instance.dataFormat,
-    };
+Map<String, dynamic> _$MessageDescriptorToJson(MessageDescriptor instance) {
+  final val = <String, dynamic>{
+    'nonce': instance.nonce,
+    'method': instance.method,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('dataCid', instance.dataCid);
+  writeNotNull('dataFormat', instance.dataFormat);
+  return val;
+}

@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:dwn_sdk/src/cid.dart';
 import 'package:dwn_sdk/src/message.dart';
 import 'package:jose/jose.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -49,55 +51,91 @@ class Test2MessageDescriptor extends MessageDescriptor {
 
 void main() {
   group('Message', () {
-    test('Parse basic message from JSON', () {
-      final TestMessage t = TestMessage.fromJson(<String, dynamic>{
+    test('Round trip basic message from JSON', () {
+      final Map<String, dynamic> json = <String, dynamic>{
         'descriptor': <String, dynamic>{
           'nonce':
               '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
           'method': 'CollectionsQuery',
-          'schema': 'https://schema.org/SocialMediaPosting'
         }
-      });
+      };
+      final TestMessage t = TestMessage.fromJson(json);
 
+      expect(t.data, isNull);
+      expect(t.authorization, isNull);
+      expect(t.attestation, isNull);
       expect(t.descriptor.method, 'CollectionsQuery');
       expect(
         t.descriptor.nonce,
         '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
       );
+      expect(t.descriptor.dataCid, isNull);
       expect(t.descriptor.dataFormat, isNull);
-      expect(t.data, isNull);
 
-      expect(t.toJson(), isNotEmpty);
+      final Map<String, dynamic> encoded =
+          jsonDecode(jsonEncode(t)) as Map<String, dynamic>;
+      expect(encoded, json);
     });
-    test('Parse advanced message from JSON', () {
-      final Test2Message t = Test2Message.fromJson(<String, dynamic>{
+
+    test('Expect unrecognised fields to be dropped', () {
+      final Map<String, dynamic> json = <String, dynamic>{
+        'descriptor': <String, dynamic>{
+          'nonce':
+              '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
+          'method': 'CollectionsQuery',
+          'schema': 'https://schema.org/SocialMediaPosting',
+          'unrecognised': null,
+        }
+      };
+      final TestMessage t = TestMessage.fromJson(json);
+
+      final Map<String, dynamic> encoded =
+          jsonDecode(jsonEncode(t)) as Map<String, dynamic>;
+      final Map<String, dynamic> expected = <String, dynamic>{
+        'descriptor': <String, dynamic>{
+          'nonce':
+              '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
+          'method': 'CollectionsQuery',
+        }
+      };
+      expect(encoded, expected);
+    });
+
+    test('Round trip advanced message from JSON', () {
+      final Map<String, dynamic> json = <String, dynamic>{
         'data': 'aGVsbG8gd29ybGQh',
         'descriptor': <String, dynamic>{
           'nonce':
               '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
           'method': 'CollectionsQuery',
           'testParameter': 'hello',
+          'dataCid': '',
+          'dataFormat': 'text/plain',
         }
-      });
+      };
+      final Test2Message t = Test2Message.fromJson(json);
 
+      expect(t.data!.encryptedData, isNull);
+      expect(
+        t.data!.data,
+        Uint8List.fromList(
+          <int>[104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 33],
+        ),
+      );
+      expect(t.authorization, isNull);
+      expect(t.attestation, isNull);
       expect(t.descriptor.method, 'CollectionsQuery');
       expect(
         t.descriptor.nonce,
         '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
       );
       expect(t.descriptor.testParameter, 'hello');
-      expect(
-        t.data,
-        Uint8List.fromList(
-          <int>[104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 33],
-        ),
-      );
+      expect(t.descriptor.dataCid, isNotNull);
+      expect(t.descriptor.dataFormat, 'text/plain');
 
-      final Map<String, dynamic> json = t.toJson();
-      expect(json['data'], 'aGVsbG8gd29ybGQh');
-      final Map<String, dynamic> jsonDescriptor =
-          json['descriptor'] as Map<String, dynamic>;
-      expect(jsonDescriptor['testParameter'], 'hello');
+      final Map<String, dynamic> encoded =
+          jsonDecode(jsonEncode(t)) as Map<String, dynamic>;
+      expect(encoded, json);
     });
   });
 }

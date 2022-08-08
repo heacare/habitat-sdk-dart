@@ -17,7 +17,6 @@ void main() {
         encryption: PermissionEncryption.optional,
         delegation: true,
       );
-
       const PermissionsRequestDescriptor descriptor =
           PermissionsRequestDescriptor(
         nonce: '1',
@@ -26,75 +25,63 @@ void main() {
         description: 'Request to do magic',
         scope: scope,
         conditions: conditions,
+        dataCid: CID(),
+        dataFormat: '',
       );
       final PermissionsRequestMessage message = PermissionsRequestMessage(
         data: MessageData(data: Uint8List(10)),
         descriptor: descriptor,
       );
 
-      final String jsonString = jsonEncode(message.toJson());
-      const String expected = '{'
-          '"data":"AAAAAAAAAAAAAA==",'
-          '"descriptor":'
-          '{'
-          '"nonce":"1",'
-          '"dataCid":null,'
-          '"dataFormat":null,'
-          '"permissionRequestId":null,'
-          '"description":"Request to do magic",'
-          '"grantedBy":"did:example:123456789abcdefghi",'
-          '"grantedTo":"did:example:123456789abcdefghi",'
-          '"scope":'
-          '{'
-          '"method":"PermissionsRequest",'
-          '"schema":"https://schema.org/HealthData"'
-          '},'
-          '"conditions":'
-          '{'
-          '"attestation":"optional",'
-          '"encryption":"optional",'
-          '"delegation":true,'
-          '"publication":null,'
-          '"sharedAccess":null'
-          '}'
-          '}'
-          '}';
-
-      expect(jsonString, equals(expected));
+      final Map<String, dynamic> json =
+          jsonDecode(jsonEncode(message.toJson())) as Map<String, dynamic>;
+      final Map<String, dynamic> expected = <String, dynamic>{
+        'data': 'AAAAAAAAAAAAAA==',
+        'descriptor': <String, dynamic>{
+          'nonce': '1',
+          'dataCid': '',
+          'dataFormat': '',
+          'description': 'Request to do magic',
+          'grantedBy': 'did:example:123456789abcdefghi',
+          'grantedTo': 'did:example:123456789abcdefghi',
+          'scope': <String, dynamic>{
+            'method': 'PermissionsRequest',
+            'schema': 'https://schema.org/HealthData'
+          },
+          'conditions': <String, dynamic>{
+            'attestation': 'optional',
+            'encryption': 'optional',
+            'delegation': true
+          }
+        }
+      };
+      expect(json, equals(expected));
     });
 
     test('Deserialize PermissionRequestMessage from JSON', () {
-      const String jsonString = '{'
-          '"data":"AAAAAAAAAAAAAA==",'
-          '"descriptor":'
-          '{'
-          '"nonce":"1",'
-          '"dataCid":null,'
-          '"dataFormat":null,'
-          '"permissionRequestId":null,'
-          '"description":"Request to do magic",'
-          '"grantedBy":"did:example:123456789abcdefghi",'
-          '"grantedTo":"did:example:123456789abcdefghi",'
-          '"scope":'
-          '{'
-          '"method":"PermissionsRequest",'
-          '"schema":"https://schema.org/HealthData"'
-          '},'
-          '"conditions":'
-          '{'
-          '"attestation":"optional",'
-          '"encryption":"optional",'
-          '"delegation":true,'
-          '"publication":null,'
-          '"sharedAccess":null'
-          '}'
-          '}'
-          '}';
+      final Map<String, dynamic> json = <String, dynamic>{
+        'data': 'AAAAAAAAAAAAAA==',
+        'descriptor': <String, dynamic>{
+          'nonce': '1',
+          'dataCid': '',
+          'dataFormat': '',
+          'description': 'Request to do magic',
+          'grantedBy': 'did:example:123456789abcdefghi',
+          'grantedTo': 'did:example:123456789abcdefghi',
+          'scope': <String, dynamic>{
+            'method': 'PermissionsRequest',
+            'schema': 'https://schema.org/HealthData'
+          },
+          'conditions': <String, dynamic>{
+            'attestation': 'optional',
+            'encryption': 'optional',
+            'delegation': true
+          }
+        }
+      };
 
-      final Map<String, dynamic> jsonMap =
-          jsonDecode(jsonString) as Map<String, dynamic>;
       final PermissionsRequestMessage message =
-          PermissionsRequestMessage.fromJson(jsonMap);
+          PermissionsRequestMessage.fromJson(json);
       final PermissionsRequestDescriptor md = message.descriptor;
 
       // Checking message
@@ -102,8 +89,8 @@ void main() {
 
       // Checking Message Descriptor
       expect(md.nonce, equals('1'));
-      expect(md.dataCid, isNull);
-      expect(md.dataFormat, isNull);
+      expect(md.dataCid, isNotNull);
+      expect(md.dataFormat, '');
       expect(md.permissionRequestId, isNull);
       expect(md.description, equals('Request to do magic'));
       expect(md.grantedBy, equals('did:example:123456789abcdefghi'));
@@ -142,6 +129,8 @@ void main() {
         permissionGrantId: '9114a8e4-d1e1-41cc-b52f-41c8cbcc0531',
         scope: scope,
         conditions: conditions,
+        dataCid: CID(),
+        dataFormat: '',
       );
 
       final PermissionsGrantMessage message = PermissionsGrantMessage(
@@ -149,76 +138,58 @@ void main() {
         descriptor: descriptor,
       );
 
-      final String jsonString = jsonEncode(message.toJson());
-
-      const String expected = '{'
-          '"data":"AAAAAAAAAAAAAA==",'
-          '"descriptor":'
-          '{'
-          '"nonce":"1",'
-          '"dataCid":null,'
-          '"dataFormat":null,'
-          '"permissionGrantId":"9114a8e4-d1e1-41cc-b52f-41c8cbcc0531",'
-          '"permissionRequestId":null,'
-          '"description":"Grant to do magic",'
-          '"grantedBy":"did:example:123456789abcdefghi",'
-          '"grantedTo":"did:example:123456789abcdefghi",'
-          '"delegatedFrom":null,'
-          '"expiry":"2022-08-02T08:45:21+0000",'
-          '"scope":'
-          '{'
-          '"method":"PermissionsGrant",'
-          '"schema":"https://schema.org/HealthData"'
-          '},'
-          '"conditions":'
-          '{'
-          '"attestation":"optional",'
-          '"encryption":"optional",'
-          '"delegation":true,'
-          '"publication":null,'
-          '"sharedAccess":null'
-          '}'
-          '}'
-          '}';
-
-      expect(jsonString, equals(expected));
+      final Map<String, dynamic> json =
+          jsonDecode(jsonEncode(message.toJson())) as Map<String, dynamic>;
+      final Map<String, dynamic> expected = <String, dynamic>{
+        'data': 'AAAAAAAAAAAAAA==',
+        'descriptor': <String, dynamic>{
+          'nonce': '1',
+          'dataCid': '',
+          'dataFormat': '',
+          'description': 'Grant to do magic',
+          'permissionGrantId': '9114a8e4-d1e1-41cc-b52f-41c8cbcc0531',
+          'expiry': '2022-08-02T08:45:21+0000',
+          'grantedBy': 'did:example:123456789abcdefghi',
+          'grantedTo': 'did:example:123456789abcdefghi',
+          'scope': <String, dynamic>{
+            'method': 'PermissionsGrant',
+            'schema': 'https://schema.org/HealthData'
+          },
+          'conditions': <String, dynamic>{
+            'attestation': 'optional',
+            'encryption': 'optional',
+            'delegation': true
+          }
+        }
+      };
+      expect(json, equals(expected));
     });
 
-    test('Deserialize PermissionRequestMessage from JSON', () {
-      const String jsonString = '{'
-          '"data":"AAAAAAAAAAAAAA==",'
-          '"descriptor":'
-          '{'
-          '"nonce":"1",'
-          '"dataCid":null,'
-          '"dataFormat":null,'
-          '"permissionGrantId":"9114a8e4-d1e1-41cc-b52f-41c8cbcc0531",'
-          '"permissionRequestId":null,'
-          '"description":"Grant to do magic",'
-          '"grantedBy":"did:example:123456789abcdefghi",'
-          '"grantedTo":"did:example:123456789abcdefghi",'
-          '"delegatedFrom":null,'
-          '"expiry":"2022-08-02T08:45:21+0000",'
-          '"scope":'
-          '{'
-          '"method":"PermissionsGrant",'
-          '"schema":"https://schema.org/HealthData"'
-          '},'
-          '"conditions":'
-          '{'
-          '"attestation":"optional",'
-          '"encryption":"optional",'
-          '"delegation":true,'
-          '"publication":null,'
-          '"sharedAccess":null'
-          '}'
-          '}'
-          '}';
-
-      final Map<String, dynamic> jsonMap =
-          jsonDecode(jsonString) as Map<String, dynamic>;
+    test('Deserialize PermissionsGrantMessage from JSON', () {
+      final Map<String, dynamic> json = <String, dynamic>{
+        'data': 'AAAAAAAAAAAAAA==',
+        'descriptor': <String, dynamic>{
+          'nonce': '1',
+          'dataCid': '',
+          'dataFormat': '',
+          'description': 'Grant to do magic',
+          'permissionGrantId': '9114a8e4-d1e1-41cc-b52f-41c8cbcc0531',
+          'expiry': '2022-08-02T08:45:21+0000',
+          'grantedBy': 'did:example:123456789abcdefghi',
+          'grantedTo': 'did:example:123456789abcdefghi',
+          'scope': <String, dynamic>{
+            'method': 'PermissionsGrant',
+            'schema': 'https://schema.org/HealthData'
+          },
+          'conditions': <String, dynamic>{
+            'attestation': 'optional',
+            'encryption': 'optional',
+            'delegation': true
+          }
+        }
+      };
       final PermissionsGrantMessage message =
-          PermissionsGrantMessage.fromJson(jsonMap);
+          PermissionsGrantMessage.fromJson(json);
       final PermissionsGrantDescriptor md = message.descriptor;
 
       // Checking message
@@ -226,8 +197,8 @@ void main() {
 
       // Checking Message Descriptor
       expect(md.nonce, equals('1'));
-      expect(md.dataCid, isNull);
-      expect(md.dataFormat, isNull);
+      expect(md.dataCid, isNotNull);
+      expect(md.dataFormat, '');
       expect(
         md.permissionGrantId,
         equals('9114a8e4-d1e1-41cc-b52f-41c8cbcc0531'),
