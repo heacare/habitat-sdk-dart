@@ -1,4 +1,4 @@
-/// Distributed Web Node interface
+/// Decentralized Web Node interface
 class DWN {
   /// A test property
   final bool test = true;
