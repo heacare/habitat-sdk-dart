@@ -15,12 +15,12 @@ Message<D> _$MessageFromJson<D extends MessageDescriptor>(
       descriptor: fromJsonD(json['descriptor']),
       authorization: json['authorization'] == null
           ? null
-          : MessageAuthorization.fromJson(JsonWebSignature.fromJson(
-              json['authorization'] as Map<String, dynamic>)),
+          : MessageAuthorization.fromJson(
+              json['authorization'] as Map<String, dynamic>),
       attestation: json['attestation'] == null
           ? null
-          : MessageAttestation.fromJson(JsonWebSignature.fromJson(
-              json['attestation'] as Map<String, dynamic>)),
+          : MessageAttestation.fromJson(
+              json['attestation'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MessageToJson<D extends MessageDescriptor>(

@@ -49,8 +49,10 @@ class DIDResolver {
   Future<DIDResolutionResult> resolve(final String did) async {
     if (useRemote) {
       final Uri url = Uri.parse('$remoteUrl/1.0/identifiers/$did');
-      final http.Response response = await httpClient
-          .get(url, headers: {'Accept': 'application/did+json'});
+      final http.Response response = await httpClient.get(
+        url,
+        headers: <String, String>{'Accept': 'application/did+json'},
+      );
 
       /*
         print('Response status: ${response.statusCode}');

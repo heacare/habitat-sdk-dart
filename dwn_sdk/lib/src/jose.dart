@@ -1,7 +1,17 @@
 /// This abstraction layer exists solely to change the output format of jose
 /// to always use the general representation, even when there exists only 1
 /// recipient.
-import 'package:jose/jose.dart' as jose;
+
+import 'package:jose2/jose2.dart' as jose;
+
+export 'package:jose2/jose2.dart'
+    show
+        JsonWebKey,
+        JsonWebKeyStore,
+        JoseHeader,
+        JoseRecipient,
+        JosePayload,
+        JoseException;
 
 /// JWE abstraction layer.
 class JWE {
@@ -9,8 +19,10 @@ class JWE {
   JWE(this.jwe);
 
   /// Constructs a JWE from a flattened or general JSON representation.
-  JWE.fromJson(final Map<String, dynamic> json)
-      : jwe = jose.JsonWebEncryption.fromJson(json);
+  JWE.fromJson(final Map<String, dynamic> json) : jwe = _fromJson(json);
+
+  static jose.JsonWebEncryption _fromJson(final Map<String, dynamic> json) =>
+      jose.JsonWebEncryption.fromJson(json);
 
   /// The inner JsonWebEncryption object.
   final jose.JsonWebEncryption jwe;
@@ -36,8 +48,10 @@ class JWS {
   JWS(this.jws);
 
   /// Constructs a JWS from a flattened or general JSON representation.
-  JWS.fromJson(final Map<String, dynamic> json)
-      : jws = jose.JsonWebSignature.fromJson(json);
+  JWS.fromJson(final Map<String, dynamic> json) : jws = _fromJson(json);
+
+  static jose.JsonWebSignature _fromJson(final Map<String, dynamic> json) =>
+      jose.JsonWebSignature.fromJson(json);
 
   /// The inner JsonWebSignature object.
   final jose.JsonWebSignature jws;

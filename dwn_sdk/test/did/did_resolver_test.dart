@@ -88,11 +88,15 @@ void main() {
       final VerificationMethod verificationMethod =
           VerificationMethod.fromJson(jsonString);
 
-      expect(verificationMethod.id,
-          equals('did:example:123456789abcdefghi#key-1'));
+      expect(
+        verificationMethod.id,
+        equals('did:example:123456789abcdefghi#key-1'),
+      );
       expect(verificationMethod.type, equals('Ed25519VerificationKey2020'));
-      expect(verificationMethod.controller,
-          equals('did:example:123456789abcdefghi'));
+      expect(
+        verificationMethod.controller,
+        equals('did:example:123456789abcdefghi'),
+      );
       expect(verificationMethod.publicKeyJwk, isNull);
       expect(
         verificationMethod.publicKeyMultibase,
@@ -133,7 +137,9 @@ void main() {
           ServiceEndpoint.fromJson(jsonString);
 
       expect(
-          serviceEndpoint.id, equals('did:example:123456789abcdefghi#key-1'));
+        serviceEndpoint.id,
+        equals('did:example:123456789abcdefghi#key-1'),
+      );
       expect(serviceEndpoint.type, equals('url'));
       expect(serviceEndpoint.serviceEndpoint, equals('https://datahouse.me'));
       expect(serviceEndpoint.description, equals('Health Data Store'));
@@ -219,7 +225,7 @@ void main() {
     });
 
     test('From JSON', () {
-      // TODO: The JSON parsing test for DIDDocument model is undone
+      // TODO(solderneer): The JSON parsing test for DIDDocument model is undone
       // Complicated to check equality without manually checking every field, wondering
       // if we can use Equatable to solve that problem in the future
     });
@@ -428,7 +434,7 @@ void main() {
         return http.Response(
           '{"context":["https://www.w3.org/ns/did/v1"],"didResolutionMetadata":{"contentType":"did+json","error":null},"didDocument":{"context":["https://www.w3.org/ns/did/v1"],"id":"did:example:123456789abcdefghi","alsoKnownAs":"dave","controller":["did:example:123456789abcdefghi"],"verificationMethod":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"service":[{"id":"did:example:123456789abcdefghi#key-1","type":"url","serviceEndpoint":"https://datahouse.me","description":"Health Data Store"}],"authentication":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"keyAgreement":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"capabilityInvocation":[],"capabilityDelegation":[]},"didDocumentMetadata":{"created":"2022-08-02T08:45:21+0000","updated":"2022-08-02T08:45:21+0000","deactivated":false,"versionId":"1.1","nextUpdate":null,"nextVersionId":null,"equivalentId":null,"canonicalId":null}}',
           200,
-          headers: {'content-type': 'application/json'},
+          headers: <String, String>{'content-type': 'application/json'},
         );
       });
 

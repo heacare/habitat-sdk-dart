@@ -1,5 +1,4 @@
 import 'package:dwn_sdk/src/jose.dart';
-import 'package:jose/jose.dart';
 import 'package:test/test.dart';
 
 void main() {

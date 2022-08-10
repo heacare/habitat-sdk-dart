@@ -7,6 +7,5 @@
 /// DWN is still in a draft state. Things may change rapidly.
 library dwn_sdk;
 
-//export 'package:jose/jose.dart';
 export 'src/cid.dart';
 export 'src/message.dart';

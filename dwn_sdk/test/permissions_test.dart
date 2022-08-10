@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dwn_sdk/dwn_sdk.dart';
+import 'package:dwn_sdk/src/cid.dart';
+import 'package:dwn_sdk/src/message.dart';
 import 'package:dwn_sdk/src/permissions.dart';
 import 'package:test/test.dart';
 

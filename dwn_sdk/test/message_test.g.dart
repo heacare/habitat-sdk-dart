@@ -12,12 +12,12 @@ TestMessage _$TestMessageFromJson(Map<String, dynamic> json) => TestMessage(
           json['descriptor'] as Map<String, dynamic>),
       authorization: json['authorization'] == null
           ? null
-          : MessageAuthorization.fromJson(JsonWebSignature.fromJson(
-              json['authorization'] as Map<String, dynamic>)),
+          : MessageAuthorization.fromJson(
+              json['authorization'] as Map<String, dynamic>),
       attestation: json['attestation'] == null
           ? null
-          : MessageAttestation.fromJson(JsonWebSignature.fromJson(
-              json['attestation'] as Map<String, dynamic>)),
+          : MessageAttestation.fromJson(
+              json['attestation'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TestMessageToJson(TestMessage instance) {
@@ -42,12 +42,12 @@ Test2Message _$Test2MessageFromJson(Map<String, dynamic> json) => Test2Message(
           json['descriptor'] as Map<String, dynamic>),
       authorization: json['authorization'] == null
           ? null
-          : MessageAuthorization.fromJson(JsonWebSignature.fromJson(
-              json['authorization'] as Map<String, dynamic>)),
+          : MessageAuthorization.fromJson(
+              json['authorization'] as Map<String, dynamic>),
       attestation: json['attestation'] == null
           ? null
-          : MessageAttestation.fromJson(JsonWebSignature.fromJson(
-              json['attestation'] as Map<String, dynamic>)),
+          : MessageAttestation.fromJson(
+              json['attestation'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$Test2MessageToJson(Test2Message instance) {

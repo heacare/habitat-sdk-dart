@@ -5,7 +5,7 @@
 /// MessageDescriptor and be JSON serializable as well.
 import 'dart:typed_data';
 
-import 'package:jose/jose.dart';
+import 'package:jose2/jose2.dart' show JsonWebSignature;
 import 'package:json_annotation/json_annotation.dart';
 
 import 'cid.dart';
@@ -152,7 +152,9 @@ class MessageAuthorization extends JWS {
   MessageAuthorization(super.jws);
 
   /// Constructs a JWS from a flattened or general JSON representation.
-  MessageAuthorization.fromJson(super.json);
+  // ignore: use_super_parameters
+  MessageAuthorization.fromJson(final Map<String, dynamic> json)
+      : super.fromJson(json);
 }
 
 /// Some messages may require attestation by a signer.
@@ -177,5 +179,7 @@ class MessageAttestation extends JWS {
   MessageAttestation(super.jws);
 
   /// Constructs a JWS from a flattened or general JSON representation.
-  MessageAttestation.fromJson(super.json);
+  // ignore: use_super_parameters
+  MessageAttestation.fromJson(final Map<String, dynamic> json)
+      : super.fromJson(json);
 }
