@@ -5,7 +5,6 @@
 /// MessageDescriptor and be JSON serializable as well.
 import 'dart:typed_data';
 
-import 'package:jose2/jose2.dart' show JsonWebSignature;
 import 'package:json_annotation/json_annotation.dart';
 
 import 'cid.dart';
