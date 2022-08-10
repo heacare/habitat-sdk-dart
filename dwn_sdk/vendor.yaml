@@ -1,0 +1,8 @@
+import_rewrites:
+  jose: jose
+vendored_dependencies:
+  jose:
+    package: jose
+    version: 0.3.2
+
+# vim: set et ts=2 sw=2:
