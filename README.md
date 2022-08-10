@@ -13,8 +13,8 @@ This repository includes an implementation of DWN in Dart with a similar API as 
 
 | Name | Pub | Docs | Source |
 |-|-|-|-|
-| Habitat SDK | [![pub package](https://img.shields.io/pub/v/habitat_sdk.svg)](https://pub.dev/packages/habitat_sdk) | [![docs](https://img.shields.io/badge/docs-blue.svg)](https://pub.dev/documentation/habitat_sdk) | [Browse](habitat_sdk) |
-| DWN SDK | [![pub package](https://img.shields.io/pub/v/dwn_sdk.svg)](https://pub.dev/packages/dwn_sdk) | [![docs](https://img.shields.io/badge/docs-blue.svg)](https://pub.dev/documentation/dwn_sdk) | [Browse](dwn_sdk) |
+| Habitat SDK | [![pub package](https://img.shields.io/pub/v/habitat_sdk.svg)](https://pub.dev/packages/habitat_sdk) | [API reference](https://pub.dev/documentation/habitat_sdk) | [Browse](habitat_sdk) |
+| DWN SDK | [![pub package](https://img.shields.io/pub/v/dwn_sdk.svg)](https://pub.dev/packages/dwn_sdk) | [API reference](https://pub.dev/documentation/dwn_sdk) | [Browse](dwn_sdk) |
 
 ## Roadmap
 
