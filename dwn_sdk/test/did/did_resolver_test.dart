@@ -16,53 +16,42 @@ void main() {
         versionId: '1.1',
       );
 
-      final String jsonString = jsonEncode(didDocumentMetadata.toJson());
-      const String expected = '{'
-          '"created":"2022-08-02T08:45:21+0000",'
-          '"updated":"2022-08-02T08:45:21+0000",'
-          '"deactivated":false,'
-          '"versionId":"1.1",'
-          '"nextUpdate":null,'
-          '"nextVersionId":null,'
-          '"equivalentId":null,'
-          '"canonicalId":null'
-          '}';
+      final Map<String, dynamic> jsonString =
+          jsonDecode(jsonEncode(didDocumentMetadata.toJson()))
+              as Map<String, dynamic>;
+      const Map<String, dynamic> expected = <String, dynamic>{
+        'created': '2022-08-02T08:45:21+0000',
+        'updated': '2022-08-02T08:45:21+0000',
+        'deactivated': false,
+        'versionId': '1.1',
+      };
 
       expect(jsonString, equals(expected));
     });
 
     test('From JSON', () {
-      const String jsonString = '{'
-          '"created":"2022-08-02T08:45:21+0000",'
-          '"updated":"2022-08-02T08:45:21+0000",'
-          '"deactivated":false,'
-          '"versionId":"1.1",'
-          '"nextUpdate":null,'
-          '"nextVersionId":null,'
-          '"equivalentId":null,'
-          '"canonicalId":null'
-          '}';
+      const Map<String, dynamic> jsonString = <String, dynamic>{
+        'created': '2022-08-02T08:45:21+0000',
+        'updated': '2022-08-02T08:45:21+0000',
+        'deactivated': false,
+        'versionId': '1.1',
+        'nextUpdate': null,
+        'nextVersionId': null,
+        'equivalentId': null,
+        'canonicalId': null
+      };
 
-      final Map<String, dynamic> jsonMap =
-          jsonDecode(jsonString) as Map<String, dynamic>;
       final DIDDocumentMetadata didDocumentMetadata =
-          DIDDocumentMetadata.fromJson(jsonMap);
+          DIDDocumentMetadata.fromJson(jsonString);
 
-      final DIDDocumentMetadata expected = DIDDocumentMetadata(
-        created: '2022-08-02T08:45:21+0000',
-        updated: '2022-08-02T08:45:21+0000',
-        deactivated: false,
-        versionId: '1.1',
-      );
-
-      expect(didDocumentMetadata.created, equals(expected.created));
-      expect(didDocumentMetadata.updated, equals(expected.updated));
-      expect(didDocumentMetadata.deactivated, equals(expected.deactivated));
-      expect(didDocumentMetadata.versionId, equals(expected.versionId));
-      expect(didDocumentMetadata.nextUpdate, equals(expected.nextUpdate));
-      expect(didDocumentMetadata.nextVersionId, equals(expected.nextVersionId));
-      expect(didDocumentMetadata.equivalentId, equals(expected.equivalentId));
-      expect(didDocumentMetadata.canonicalId, equals(expected.canonicalId));
+      expect(didDocumentMetadata.created, equals('2022-08-02T08:45:21+0000'));
+      expect(didDocumentMetadata.updated, equals('2022-08-02T08:45:21+0000'));
+      expect(didDocumentMetadata.deactivated, isFalse);
+      expect(didDocumentMetadata.versionId, equals('1.1'));
+      expect(didDocumentMetadata.nextUpdate, isNull);
+      expect(didDocumentMetadata.nextVersionId, isNull);
+      expect(didDocumentMetadata.equivalentId, isNull);
+      expect(didDocumentMetadata.canonicalId, isNull);
     });
   });
 
@@ -76,43 +65,38 @@ void main() {
         publicKeyMultibase: 'zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV',
       );
 
-      final String jsonString = jsonEncode(verificationMethod.toJson());
-      const String expected = '{'
-          '"id":"did:example:123456789abcdefghi#key-1",'
-          '"type":"Ed25519VerificationKey2020",'
-          '"controller":"did:example:123456789abcdefghi",'
-          '"publicKeyJwk":null,'
-          '"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}';
+      final Map<String, dynamic> jsonString = verificationMethod.toJson();
+      const Map<String, dynamic> expected = <String, dynamic>{
+        'id': 'did:example:123456789abcdefghi#key-1',
+        'type': 'Ed25519VerificationKey2020',
+        'controller': 'did:example:123456789abcdefghi',
+        'publicKeyMultibase': 'zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV'
+      };
 
       expect(jsonString, equals(expected));
     });
 
     test('From JSON', () {
-      const String jsonString = '{'
-          '"id":"did:example:123456789abcdefghi#key-1",'
-          '"type":"Ed25519VerificationKey2020",'
-          '"controller":"did:example:123456789abcdefghi",'
-          '"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}';
+      const Map<String, dynamic> jsonString = <String, dynamic>{
+        'id': 'did:example:123456789abcdefghi#key-1',
+        'type': 'Ed25519VerificationKey2020',
+        'controller': 'did:example:123456789abcdefghi',
+        'publicKeyJwk': null,
+        'publicKeyMultibase': 'zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV'
+      };
 
-      final Map<String, dynamic> jsonMap =
-          jsonDecode(jsonString) as Map<String, dynamic>;
       final VerificationMethod verificationMethod =
-          VerificationMethod.fromJson(jsonMap);
+          VerificationMethod.fromJson(jsonString);
 
-      final VerificationMethod expected = VerificationMethod(
-        id: 'did:example:123456789abcdefghi#key-1',
-        type: 'Ed25519VerificationKey2020',
-        controller: 'did:example:123456789abcdefghi',
-        publicKeyMultibase: 'zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV',
-      );
-
-      expect(verificationMethod.id, equals(expected.id));
-      expect(verificationMethod.type, equals(expected.type));
-      expect(verificationMethod.controller, equals(expected.controller));
-      expect(verificationMethod.publicKeyJwk, equals(expected.publicKeyJwk));
+      expect(verificationMethod.id,
+          equals('did:example:123456789abcdefghi#key-1'));
+      expect(verificationMethod.type, equals('Ed25519VerificationKey2020'));
+      expect(verificationMethod.controller,
+          equals('did:example:123456789abcdefghi'));
+      expect(verificationMethod.publicKeyJwk, isNull);
       expect(
         verificationMethod.publicKeyMultibase,
-        equals(expected.publicKeyMultibase),
+        equals('zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV'),
       );
     });
   });
@@ -126,38 +110,33 @@ void main() {
         description: 'Health Data Store',
       );
 
-      final String jsonString = jsonEncode(serviceEndpoint.toJson());
-      const String expected = '{'
-          '"id":"did:example:123456789abcdefghi#key-1",'
-          '"type":"url",'
-          '"serviceEndpoint":"https://datahouse.me",'
-          '"description":"Health Data Store"}';
+      final Map<String, dynamic> jsonString = serviceEndpoint.toJson();
+      const Map<String, dynamic> expected = <String, dynamic>{
+        'id': 'did:example:123456789abcdefghi#key-1',
+        'type': 'url',
+        'serviceEndpoint': 'https://datahouse.me',
+        'description': 'Health Data Store'
+      };
 
       expect(jsonString, equals(expected));
     });
 
     test('From JSON', () {
-      const String jsonString = '{'
-          '"id":"did:example:123456789abcdefghi#key-1",'
-          '"type":"url",'
-          '"serviceEndpoint":"https://datahouse.me",'
-          '"description":"Health Data Store"}';
+      const Map<String, dynamic> jsonString = <String, dynamic>{
+        'id': 'did:example:123456789abcdefghi#key-1',
+        'type': 'url',
+        'serviceEndpoint': 'https://datahouse.me',
+        'description': 'Health Data Store'
+      };
 
-      final Map<String, dynamic> jsonMap =
-          jsonDecode(jsonString) as Map<String, dynamic>;
-      final ServiceEndpoint serviceEndpoint = ServiceEndpoint.fromJson(jsonMap);
+      final ServiceEndpoint serviceEndpoint =
+          ServiceEndpoint.fromJson(jsonString);
 
-      final ServiceEndpoint expected = ServiceEndpoint(
-        id: 'did:example:123456789abcdefghi#key-1',
-        type: 'url',
-        serviceEndpoint: 'https://datahouse.me',
-        description: 'Health Data Store',
-      );
-
-      expect(serviceEndpoint.id, equals(expected.id));
-      expect(serviceEndpoint.type, equals(expected.type));
-      expect(serviceEndpoint.serviceEndpoint, equals(expected.serviceEndpoint));
-      expect(serviceEndpoint.description, equals(expected.description));
+      expect(
+          serviceEndpoint.id, equals('did:example:123456789abcdefghi#key-1'));
+      expect(serviceEndpoint.type, equals('url'));
+      expect(serviceEndpoint.serviceEndpoint, equals('https://datahouse.me'));
+      expect(serviceEndpoint.description, equals('Health Data Store'));
     });
   });
 
@@ -190,40 +169,51 @@ void main() {
         keyAgreement: <VerificationMethod>[verificationMethod],
       );
 
-      final String jsonString = jsonEncode(didDocument.toJson());
-      const String expected = '{'
-          '"context":["https://www.w3.org/ns/did/v1"],'
-          '"id":"did:example:123456789abcdefghi",'
-          '"alsoKnownAs":"dave",'
-          '"controller":["did:example:123456789abcdefghi"],'
-          '"verificationMethod":[{'
-          '"id":"did:example:123456789abcdefghi#key-1",'
-          '"type":"Ed25519VerificationKey2020",'
-          '"controller":"did:example:123456789abcdefghi",'
-          '"publicKeyJwk":null,'
-          '"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"'
-          '}],'
-          '"service":[{'
-          '"id":"did:example:123456789abcdefghi#key-1",'
-          '"type":"url","serviceEndpoint":"https://datahouse.me",'
-          '"description":"Health Data Store"'
-          '}],'
-          '"authentication":[{'
-          '"id":"did:example:123456789abcdefghi#key-1",'
-          '"type":"Ed25519VerificationKey2020",'
-          '"controller":"did:example:123456789abcdefghi",'
-          '"publicKeyJwk":null,'
-          '"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"'
-          '}],'
-          '"keyAgreement":[{'
-          '"id":"did:example:123456789abcdefghi#key-1",'
-          '"type":"Ed25519VerificationKey2020",'
-          '"controller":"did:example:123456789abcdefghi",'
-          '"publicKeyJwk":null,'
-          '"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"'
-          '}],'
-          '"capabilityInvocation":[],'
-          '"capabilityDelegation":[]}';
+      final Map<String, dynamic> jsonString =
+          jsonDecode(jsonEncode(didDocument.toJson())) as Map<String, dynamic>;
+      const Map<String, dynamic> expected = <String, dynamic>{
+        'context': <String>['https://www.w3.org/ns/did/v1'],
+        'id': 'did:example:123456789abcdefghi',
+        'alsoKnownAs': 'dave',
+        'controller': <String>['did:example:123456789abcdefghi'],
+        'verificationMethod': <Map<String, dynamic>>[
+          <String, dynamic>{
+            'id': 'did:example:123456789abcdefghi#key-1',
+            'type': 'Ed25519VerificationKey2020',
+            'controller': 'did:example:123456789abcdefghi',
+            'publicKeyMultibase':
+                'zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV',
+          }
+        ],
+        'service': <Map<String, dynamic>>[
+          <String, dynamic>{
+            'id': 'did:example:123456789abcdefghi#key-1',
+            'type': 'url',
+            'serviceEndpoint': 'https://datahouse.me',
+            'description': 'Health Data Store',
+          }
+        ],
+        'authentication': <Map<String, dynamic>>[
+          <String, dynamic>{
+            'id': 'did:example:123456789abcdefghi#key-1',
+            'type': 'Ed25519VerificationKey2020',
+            'controller': 'did:example:123456789abcdefghi',
+            'publicKeyMultibase':
+                'zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV'
+          }
+        ],
+        'keyAgreement': <Map<String, dynamic>>[
+          <String, dynamic>{
+            'id': 'did:example:123456789abcdefghi#key-1',
+            'type': 'Ed25519VerificationKey2020',
+            'controller': 'did:example:123456789abcdefghi',
+            'publicKeyMultibase':
+                'zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV',
+          }
+        ],
+        'capabilityInvocation': <Map<String, dynamic>>[],
+        'capabilityDelegation': <Map<String, dynamic>>[]
+      };
 
       expect(jsonString, equals(expected));
     });
@@ -241,8 +231,11 @@ void main() {
         error: DIDResolutionError.notFound,
       );
 
-      final String jsonString = jsonEncode(didResolutionMetadata.toJson());
-      const String expected = '{"contentType":null,"error":"notFound"}';
+      const Map<String, dynamic> expected = <String, dynamic>{
+        'error': 'notFound',
+      };
+
+      final Map<String, dynamic> jsonString = didResolutionMetadata.toJson();
 
       expect(jsonString, equals(expected));
     });
@@ -252,8 +245,11 @@ void main() {
         error: DIDResolutionError.invalidDID,
       );
 
-      final String jsonString = jsonEncode(didResolutionMetadata.toJson());
-      const String expected = '{"contentType":null,"error":"invalidDID"}';
+      const Map<String, dynamic> expected = <String, dynamic>{
+        'error': 'invalidDID',
+      };
+
+      final Map<String, dynamic> jsonString = didResolutionMetadata.toJson();
 
       expect(jsonString, equals(expected));
     });
@@ -263,9 +259,11 @@ void main() {
         error: DIDResolutionError.representationNotSupported,
       );
 
-      final String jsonString = jsonEncode(didResolutionMetadata.toJson());
-      const String expected =
-          '{"contentType":null,"error":"representationNotSupported"}';
+      const Map<String, dynamic> expected = <String, dynamic>{
+        'error': 'representationNotSupported',
+      };
+
+      final Map<String, dynamic> jsonString = didResolutionMetadata.toJson();
 
       expect(jsonString, equals(expected));
     });
@@ -275,9 +273,11 @@ void main() {
         error: DIDResolutionError.unsupportedDIDMethod,
       );
 
-      final String jsonString = jsonEncode(didResolutionMetadata.toJson());
-      const String expected =
-          '{"contentType":null,"error":"unsupportedDIDMethod"}';
+      const Map<String, dynamic> expected = <String, dynamic>{
+        'error': 'unsupportedDIDMethod',
+      };
+
+      final Map<String, dynamic> jsonString = didResolutionMetadata.toJson();
 
       expect(jsonString, equals(expected));
     });
@@ -287,8 +287,11 @@ void main() {
         contentType: 'did+json',
       );
 
-      final String jsonString = jsonEncode(didResolutionMetadata.toJson());
-      const String expected = '{"contentType":"did+json","error":null}';
+      const Map<String, dynamic> expected = <String, dynamic>{
+        'contentType': 'did+json',
+      };
+
+      final Map<String, dynamic> jsonString = didResolutionMetadata.toJson();
 
       expect(jsonString, equals(expected));
     });
@@ -344,9 +347,64 @@ void main() {
         didDocumentMetadata: didDocumentMetadata,
       );
 
-      final String jsonString = jsonEncode(didResolutionResult.toJson());
-      const String expected =
-          '{"context":["https://www.w3.org/ns/did/v1"],"didResolutionMetadata":{"contentType":"did+json","error":null},"didDocument":{"context":["https://www.w3.org/ns/did/v1"],"id":"did:example:123456789abcdefghi","alsoKnownAs":"dave","controller":["did:example:123456789abcdefghi"],"verificationMethod":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"service":[{"id":"did:example:123456789abcdefghi#key-1","type":"url","serviceEndpoint":"https://datahouse.me","description":"Health Data Store"}],"authentication":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"keyAgreement":[{"id":"did:example:123456789abcdefghi#key-1","type":"Ed25519VerificationKey2020","controller":"did:example:123456789abcdefghi","publicKeyJwk":null,"publicKeyMultibase":"zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"}],"capabilityInvocation":[],"capabilityDelegation":[]},"didDocumentMetadata":{"created":"2022-08-02T08:45:21+0000","updated":"2022-08-02T08:45:21+0000","deactivated":false,"versionId":"1.1","nextUpdate":null,"nextVersionId":null,"equivalentId":null,"canonicalId":null}}';
+      final Map<String, dynamic> jsonString =
+          jsonDecode(jsonEncode(didResolutionResult.toJson()))
+              as Map<String, dynamic>;
+      final Map<String, dynamic> expected = <String, dynamic>{
+        'context': <String>['https://www.w3.org/ns/did/v1'],
+        'didResolutionMetadata': <String, dynamic>{
+          'contentType': 'did+json',
+        },
+        'didDocument': <String, dynamic>{
+          'context': <String>['https://www.w3.org/ns/did/v1'],
+          'id': 'did:example:123456789abcdefghi',
+          'alsoKnownAs': 'dave',
+          'controller': <String>['did:example:123456789abcdefghi'],
+          'verificationMethod': <Map<String, dynamic>>[
+            <String, dynamic>{
+              'id': 'did:example:123456789abcdefghi#key-1',
+              'type': 'Ed25519VerificationKey2020',
+              'controller': 'did:example:123456789abcdefghi',
+              'publicKeyMultibase':
+                  'zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV',
+            }
+          ],
+          'service': <Map<String, dynamic>>[
+            <String, dynamic>{
+              'id': 'did:example:123456789abcdefghi#key-1',
+              'type': 'url',
+              'serviceEndpoint': 'https://datahouse.me',
+              'description': 'Health Data Store',
+            }
+          ],
+          'authentication': <Map<String, dynamic>>[
+            <String, dynamic>{
+              'id': 'did:example:123456789abcdefghi#key-1',
+              'type': 'Ed25519VerificationKey2020',
+              'controller': 'did:example:123456789abcdefghi',
+              'publicKeyMultibase':
+                  'zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV'
+            }
+          ],
+          'keyAgreement': <Map<String, dynamic>>[
+            <String, dynamic>{
+              'id': 'did:example:123456789abcdefghi#key-1',
+              'type': 'Ed25519VerificationKey2020',
+              'controller': 'did:example:123456789abcdefghi',
+              'publicKeyMultibase':
+                  'zH3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV',
+            }
+          ],
+          'capabilityInvocation': <Map<String, dynamic>>[],
+          'capabilityDelegation': <Map<String, dynamic>>[]
+        },
+        'didDocumentMetadata': <String, dynamic>{
+          'created': '2022-08-02T08:45:21+0000',
+          'updated': '2022-08-02T08:45:21+0000',
+          'deactivated': false,
+          'versionId': '1.1',
+        }
+      };
 
       expect(jsonString, equals(expected));
     });
