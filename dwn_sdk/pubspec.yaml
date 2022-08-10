@@ -1,8 +1,9 @@
 name: dwn_sdk
 description: A Dart implementation of Decentralized Web Node (DWN)
 version: 0.1.0-dev.2
-homepage: https://github.com/heacare/habitat-sdk-dart
+homepage: https://github.com/heacare/habitat-sdk-dart/tree/main/dwn_sdk
 repository: https://github.com/heacare/habitat-sdk-dart
+issue_tracker: https://github.com/heacare/habitat-sdk-dart/issues
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
