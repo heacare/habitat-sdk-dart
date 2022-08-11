@@ -38,12 +38,14 @@ CollectionsDeleteDescriptor _$CollectionsDeleteDescriptorFromJson(
           ? null
           : CID.fromJson(json['dataCid'] as String),
       dataFormat: json['dataFormat'] as String?,
+      method: json['method'] as String? ?? 'CollectionsDelete',
     );
 
 Map<String, dynamic> _$CollectionsDeleteDescriptorToJson(
     CollectionsDeleteDescriptor instance) {
   final val = <String, dynamic>{
     'nonce': instance.nonce,
+    'method': instance.method,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -93,12 +95,14 @@ CollectionsCommitDescriptor _$CollectionsCommitDescriptorFromJson(
       dataFormat: json['dataFormat'] as String?,
       schema: json['schema'] as String?,
       dataPublished: json['dataPublished'] as int?,
+      method: json['method'] as String? ?? 'CollectionsCommit',
     );
 
 Map<String, dynamic> _$CollectionsCommitDescriptorToJson(
     CollectionsCommitDescriptor instance) {
   final val = <String, dynamic>{
     'nonce': instance.nonce,
+    'method': instance.method,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -152,12 +156,14 @@ CollectionsWriteDescriptor _$CollectionsWriteDescriptorFromJson(
       schema: json['schema'] as String?,
       published: json['published'] as bool?,
       dataPublished: json['dataPublished'] as int?,
+      method: json['method'] as String? ?? 'CollectionsWrite',
     );
 
 Map<String, dynamic> _$CollectionsWriteDescriptorToJson(
     CollectionsWriteDescriptor instance) {
   final val = <String, dynamic>{
     'nonce': instance.nonce,
+    'method': instance.method,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -211,12 +217,14 @@ CollectionsQueryDescriptor _$CollectionsQueryDescriptorFromJson(
       recordId: json['recordId'] as String?,
       dateSort:
           $enumDecodeNullable(_$CollectionDateSortEnumMap, json['dateSort']),
+      method: json['method'] as String? ?? 'CollectionsQuery',
     );
 
 Map<String, dynamic> _$CollectionsQueryDescriptorToJson(
     CollectionsQueryDescriptor instance) {
   final val = <String, dynamic>{
     'nonce': instance.nonce,
+    'method': instance.method,
   };
 
   void writeNotNull(String key, dynamic value) {

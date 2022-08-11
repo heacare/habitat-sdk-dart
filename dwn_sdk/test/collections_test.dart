@@ -56,9 +56,11 @@ void main() {
           CollectionsQueryMessage.fromJson(json);
 
       expect(
-          message.descriptor.nonce,
-          equals(
-              '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106'));
+        message.descriptor.nonce,
+        equals(
+          '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
+        ),
+      );
       expect(message.descriptor.dataCid, isNotNull);
       expect(message.descriptor.dataFormat, '');
       expect(message.descriptor.method, equals('CollectionsQuery'));
@@ -116,14 +118,18 @@ void main() {
           CollectionsQueryMessage.fromJson(json);
 
       expect(
-          message.descriptor.nonce,
-          equals(
-              '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106'));
+        message.descriptor.nonce,
+        equals(
+          '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
+        ),
+      );
       expect(message.descriptor.dataCid, isNotNull);
       expect(message.descriptor.dataFormat, '');
       expect(message.descriptor.method, equals('CollectionsQuery'));
-      expect(message.descriptor.schema,
-          equals('https://schema.org/MusicPlaylist'));
+      expect(
+        message.descriptor.schema,
+        equals('https://schema.org/MusicPlaylist'),
+      );
     });
   });
 
@@ -184,16 +190,22 @@ void main() {
           CollectionsWriteMessage.fromJson(json);
 
       expect(
-          message.descriptor.nonce,
-          equals(
-              '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106'));
+        message.descriptor.nonce,
+        equals(
+          '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
+        ),
+      );
       expect(message.descriptor.dataCid, isNotNull);
       expect(message.descriptor.dataFormat, '');
       expect(message.descriptor.method, equals('CollectionsWrite'));
-      expect(message.descriptor.schema,
-          equals('https://schema.org/MusicPlaylist'));
-      expect(message.descriptor.recordId,
-          equals('b6464162-84af-4aab-aff5-f1f8438dfc1e'));
+      expect(
+        message.descriptor.schema,
+        equals('https://schema.org/MusicPlaylist'),
+      );
+      expect(
+        message.descriptor.recordId,
+        equals('b6464162-84af-4aab-aff5-f1f8438dfc1e'),
+      );
       expect(message.descriptor.dateCreated, equals(123456789));
       expect(message.descriptor.published, isTrue);
     });
@@ -253,16 +265,22 @@ void main() {
           CollectionsCommitMessage.fromJson(json);
 
       expect(
-          message.descriptor.nonce,
-          equals(
-              '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106'));
+        message.descriptor.nonce,
+        equals(
+          '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
+        ),
+      );
       expect(message.descriptor.dataCid, isNotNull);
       expect(message.descriptor.dataFormat, '');
       expect(message.descriptor.method, equals('CollectionsCommit'));
-      expect(message.descriptor.schema,
-          equals('https://schema.org/MusicPlaylist'));
-      expect(message.descriptor.recordId,
-          equals('b6464162-84af-4aab-aff5-f1f8438dfc1e'));
+      expect(
+        message.descriptor.schema,
+        equals('https://schema.org/MusicPlaylist'),
+      );
+      expect(
+        message.descriptor.recordId,
+        equals('b6464162-84af-4aab-aff5-f1f8438dfc1e'),
+      );
       expect(message.descriptor.dateCreated, equals(123456789));
     });
   });
@@ -316,14 +334,18 @@ void main() {
           CollectionsDeleteMessage.fromJson(json);
 
       expect(
-          message.descriptor.nonce,
-          equals(
-              '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106'));
+        message.descriptor.nonce,
+        equals(
+          '9b9c7f1fcabfc471ee2682890b58a427ba2c8db59ddf3c2d5ad16ccc84bb3106',
+        ),
+      );
       expect(message.descriptor.dataCid, isNotNull);
       expect(message.descriptor.dataFormat, '');
       expect(message.descriptor.method, equals('CollectionsDelete'));
-      expect(message.descriptor.recordId,
-          equals('b6464162-84af-4aab-aff5-f1f8438dfc1e'));
+      expect(
+        message.descriptor.recordId,
+        equals('b6464162-84af-4aab-aff5-f1f8438dfc1e'),
+      );
     });
   });
 }

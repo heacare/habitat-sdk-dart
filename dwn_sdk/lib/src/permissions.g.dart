@@ -69,12 +69,14 @@ PermissionsRequestDescriptor _$PermissionsRequestDescriptorFromJson(
           ? null
           : PermissionConditions.fromJson(
               json['conditions'] as Map<String, dynamic>),
+      method: json['method'] as String? ?? 'PermissionRequest',
     );
 
 Map<String, dynamic> _$PermissionsRequestDescriptorToJson(
     PermissionsRequestDescriptor instance) {
   final val = <String, dynamic>{
     'nonce': instance.nonce,
+    'method': instance.method,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -114,12 +116,14 @@ PermissionsGrantDescriptor _$PermissionsGrantDescriptorFromJson(
           ? null
           : PermissionConditions.fromJson(
               json['conditions'] as Map<String, dynamic>),
+      method: json['method'] as String? ?? 'PermissionsGrant',
     );
 
 Map<String, dynamic> _$PermissionsGrantDescriptorToJson(
     PermissionsGrantDescriptor instance) {
   final val = <String, dynamic>{
     'nonce': instance.nonce,
+    'method': instance.method,
   };
 
   void writeNotNull(String key, dynamic value) {

@@ -16,7 +16,7 @@ export 'package:jose2/jose2.dart'
 /// JWE abstraction layer.
 class JWE {
   /// Constructs a JWE from an existing JsonWebEncryption.
-  JWE(this.jwe);
+  const JWE(this.jwe);
 
   /// Constructs a JWE from a flattened or general JSON representation.
   JWE.fromJson(final Map<String, dynamic> json) : jwe = _fromJson(json);
@@ -45,7 +45,7 @@ class JWE {
 /// JWS abstraction layer.
 class JWS {
   /// Constructs a JWS from an existing JsonWebSignature.
-  JWS(this.jws);
+  const JWS(this.jws);
 
   /// Constructs a JWS from a flattened or general JSON representation.
   JWS.fromJson(final Map<String, dynamic> json) : jws = _fromJson(json);

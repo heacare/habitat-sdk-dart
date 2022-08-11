@@ -34,7 +34,10 @@ class CollectionsDeleteDescriptor extends MessageDescriptor {
     required this.recordId,
     final super.dataCid,
     final super.dataFormat,
-  }) : super(method: 'CollectionsDelete');
+    // TODO(serverwentdown): Move into `super(method: 'MethodName')`
+    // https://github.com/google/json_serializable.dart/pull/1178
+    final super.method = 'CollectionsDelete',
+  });
 
   /// Deserialize object from JSON
   factory CollectionsDeleteDescriptor.fromJson(
@@ -82,7 +85,10 @@ class CollectionsCommitDescriptor extends MessageDescriptor {
     final super.dataFormat,
     this.schema,
     this.dataPublished,
-  }) : super(method: 'CollectionsCommit');
+    // TODO(serverwentdown): Move into `super(method: 'MethodName')`
+    // https://github.com/google/json_serializable.dart/pull/1178
+    final super.method = 'CollectionsCommit',
+  });
 
   /// Deserialize object from JSON
   factory CollectionsCommitDescriptor.fromJson(
@@ -140,7 +146,10 @@ class CollectionsWriteDescriptor extends MessageDescriptor {
     this.schema,
     this.published,
     this.dataPublished,
-  }) : super(method: 'CollectionsWrite');
+    // TODO(serverwentdown): Move into `super(method: 'MethodName')`
+    // https://github.com/google/json_serializable.dart/pull/1178
+    final super.method = 'CollectionsWrite',
+  });
 
   /// Deserialize object from JSON
   factory CollectionsWriteDescriptor.fromJson(
@@ -202,7 +211,10 @@ class CollectionsQueryDescriptor extends MessageDescriptor {
     this.schema,
     this.recordId,
     this.dateSort,
-  }) : super(method: 'CollectionsQuery');
+    // TODO(serverwentdown): Move into `super(method: 'MethodName')`
+    // https://github.com/google/json_serializable.dart/pull/1178
+    final super.method = 'CollectionsQuery',
+  });
 
   /// Deserialize object from JSON
   factory CollectionsQueryDescriptor.fromJson(

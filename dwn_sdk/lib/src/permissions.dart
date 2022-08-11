@@ -47,9 +47,10 @@ class PermissionsRequestDescriptor extends MessageDescriptor {
     required this.scope,
     this.permissionRequestId,
     this.conditions,
-  }) : super(
-          method: 'PermissionsGrant',
-        );
+    // TODO(serverwentdown): Move into `super(method: 'MethodName')`
+    // https://github.com/google/json_serializable.dart/pull/1178
+    final super.method = 'PermissionRequest',
+  });
 
   /// Deserialize object from JSON
   factory PermissionsRequestDescriptor.fromJson(
@@ -97,9 +98,10 @@ class PermissionsGrantDescriptor extends MessageDescriptor {
     this.permissionRequestId,
     this.delegatedFrom,
     this.conditions,
-  }) : super(
-          method: 'PermissionsGrant',
-        );
+    // TODO(serverwentdown): Move into `super(method: 'MethodName')`
+    // https://github.com/google/json_serializable.dart/pull/1178
+    final super.method = 'PermissionsGrant',
+  });
 
   /// Deserialize object from JSON
   factory PermissionsGrantDescriptor.fromJson(

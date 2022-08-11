@@ -148,7 +148,7 @@ class MessageDescriptor {
 /// See https://identity.foundation/decentralized-web-node/spec/#message-authorization
 class MessageAuthorization extends JWS {
   /// Wrap an existing JsonWebSignature.
-  MessageAuthorization(super.jws);
+  const MessageAuthorization(super.jws);
 
   /// Constructs a JWS from a flattened or general JSON representation.
   // ignore: use_super_parameters
@@ -175,7 +175,7 @@ class MessageAttestation extends JWS {
   /// var authorization = MessageAuthorization(jws);
   /// ...
   /// ```
-  MessageAttestation(super.jws);
+  const MessageAttestation(super.jws);
 
   /// Constructs a JWS from a flattened or general JSON representation.
   // ignore: use_super_parameters

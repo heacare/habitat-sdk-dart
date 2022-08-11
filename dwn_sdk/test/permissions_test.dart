@@ -40,6 +40,7 @@ void main() {
         'data': 'AAAAAAAAAAAAAA==',
         'descriptor': <String, dynamic>{
           'nonce': '1',
+          'method': 'PermissionRequest',
           'dataCid': '',
           'dataFormat': '',
           'description': 'Request to do magic',
@@ -64,6 +65,7 @@ void main() {
         'data': 'AAAAAAAAAAAAAA==',
         'descriptor': <String, dynamic>{
           'nonce': '1',
+          'method': 'PermissionRequest',
           'dataCid': '',
           'dataFormat': '',
           'description': 'Request to do magic',
@@ -90,6 +92,7 @@ void main() {
 
       // Checking Message Descriptor
       expect(md.nonce, equals('1'));
+      expect(md.method, 'PermissionRequest');
       expect(md.dataCid, isNotNull);
       expect(md.dataFormat, '');
       expect(md.permissionRequestId, isNull);
@@ -145,6 +148,7 @@ void main() {
         'data': 'AAAAAAAAAAAAAA==',
         'descriptor': <String, dynamic>{
           'nonce': '1',
+          'method': 'PermissionsGrant',
           'dataCid': '',
           'dataFormat': '',
           'description': 'Grant to do magic',
@@ -171,6 +175,7 @@ void main() {
         'data': 'AAAAAAAAAAAAAA==',
         'descriptor': <String, dynamic>{
           'nonce': '1',
+          'method': 'PermissionsGrant',
           'dataCid': '',
           'dataFormat': '',
           'description': 'Grant to do magic',
@@ -198,6 +203,7 @@ void main() {
 
       // Checking Message Descriptor
       expect(md.nonce, equals('1'));
+      expect(md.method, 'PermissionsGrant');
       expect(md.dataCid, isNotNull);
       expect(md.dataFormat, '');
       expect(
