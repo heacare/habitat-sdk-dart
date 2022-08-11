@@ -101,10 +101,10 @@ class CollectionsCommitDescriptor extends MessageDescriptor {
   final String recordId;
 
   /// An UNIX Epoch timestamp which is the time when the logical entry is created.
-  final String dateCreated;
+  final int dateCreated;
 
   /// An UNIX Epoch timestamp which is the time when the logical entry is published.
-  final String? dataPublished;
+  final int? dataPublished;
 }
 
 /// A CollectionsWriteMessage
@@ -165,10 +165,10 @@ class CollectionsWriteDescriptor extends MessageDescriptor {
   final bool? published;
 
   /// An UNIX Epoch timestamp which is the time when the logical entry is created.
-  final String dateCreated;
+  final int dateCreated;
 
   /// An UNIX Epoch timestamp which is the time when the logical entry is published.
-  final String? dataPublished;
+  final int? dataPublished;
 }
 
 /// A CollectionsQueryMessage

@@ -86,13 +86,13 @@ CollectionsCommitDescriptor _$CollectionsCommitDescriptorFromJson(
     CollectionsCommitDescriptor(
       nonce: json['nonce'] as String,
       recordId: json['recordId'] as String,
-      dateCreated: json['dateCreated'] as String,
+      dateCreated: json['dateCreated'] as int,
       dataCid: json['dataCid'] == null
           ? null
           : CID.fromJson(json['dataCid'] as String),
       dataFormat: json['dataFormat'] as String?,
       schema: json['schema'] as String?,
-      dataPublished: json['dataPublished'] as String?,
+      dataPublished: json['dataPublished'] as int?,
     );
 
 Map<String, dynamic> _$CollectionsCommitDescriptorToJson(
@@ -144,14 +144,14 @@ CollectionsWriteDescriptor _$CollectionsWriteDescriptorFromJson(
     CollectionsWriteDescriptor(
       nonce: json['nonce'] as String,
       recordId: json['recordId'] as String,
-      dateCreated: json['dateCreated'] as String,
+      dateCreated: json['dateCreated'] as int,
       dataCid: json['dataCid'] == null
           ? null
           : CID.fromJson(json['dataCid'] as String),
       dataFormat: json['dataFormat'] as String?,
       schema: json['schema'] as String?,
       published: json['published'] as bool?,
-      dataPublished: json['dataPublished'] as String?,
+      dataPublished: json['dataPublished'] as int?,
     );
 
 Map<String, dynamic> _$CollectionsWriteDescriptorToJson(
