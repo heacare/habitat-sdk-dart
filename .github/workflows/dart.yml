@@ -33,7 +33,7 @@ jobs:
         with:
           sdk: stable
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: dwn_sdk_pub_upgrade
         name: dwn_sdk; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
@@ -65,7 +65,7 @@ jobs:
         with:
           sdk: stable
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: habitat_sdk_pub_upgrade
         name: habitat_sdk; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
@@ -97,7 +97,7 @@ jobs:
         with:
           sdk: dev
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: dwn_sdk_pub_upgrade
         name: dwn_sdk; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
@@ -128,7 +128,7 @@ jobs:
         with:
           sdk: dev
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: habitat_sdk_pub_upgrade
         name: habitat_sdk; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
@@ -159,7 +159,7 @@ jobs:
         with:
           sdk: stable
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: dwn_sdk_pub_upgrade
         name: dwn_sdk; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
@@ -190,7 +190,7 @@ jobs:
         with:
           sdk: stable
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: habitat_sdk_pub_upgrade
         name: habitat_sdk; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
