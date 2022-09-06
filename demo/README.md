@@ -1,6 +1,4 @@
-# habitat_demo
-
-A new Flutter project.
+# Habitat SDK Demo
 
 ## Getting Started
 
