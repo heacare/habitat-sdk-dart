@@ -57,7 +57,7 @@ class ListTileCentered extends StatelessWidget {
         minimum: contentPadding.resolve(textDirection),
         child: Row(
           textDirection: textDirection,
-          children: [
+          children: <Widget>[
             if (leading != null) leading!,
             if (leading != null) SizedBox(width: horizontalTitleGap),
             Expanded(
@@ -65,7 +65,7 @@ class ListTileCentered extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: minVerticalPadding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     titleText,
                     subtitleText,
                   ],

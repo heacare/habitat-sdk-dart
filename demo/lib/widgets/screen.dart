@@ -7,7 +7,10 @@ class Screen extends StatelessWidget {
     this.listView = false,
     this.child,
     this.children,
-  }) : assert(child != null || children != null);
+  }) : assert(
+          child != null || children != null,
+          'Either child or children must be specified',
+        );
 
   final bool fullWidth;
   final bool listView;

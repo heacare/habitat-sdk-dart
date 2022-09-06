@@ -101,7 +101,7 @@ SystemUiOverlayStyle resolveOverlayStyle(final ThemeMode themeMode) {
     case ThemeMode.dark:
       brightness = Brightness.dark;
       break;
-    default:
+    case ThemeMode.system:
       brightness = WidgetsBinding.instance.window.platformBrightness;
   }
 

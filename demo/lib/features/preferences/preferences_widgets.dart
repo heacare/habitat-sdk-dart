@@ -12,7 +12,7 @@ class PreferenceGroup extends StatelessWidget {
   Widget _buildItems(final BuildContext context) => Column(
         children: items
             .expand(
-              (final Widget item) => [
+              (final Widget item) => <Widget>[
                 const Divider(indent: 16, endIndent: 16, height: 0),
                 item,
               ],
@@ -23,9 +23,9 @@ class PreferenceGroup extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Column(
-        children: [
+        children: <Widget>[
           Row(
-            children: [
+            children: <Widget>[
               Expanded(
                 child: Padding(
                   padding:
@@ -109,7 +109,7 @@ class PreferenceChoice<T> extends StatelessWidget {
     required this.choices,
     required this.value,
     required this.onChanged,
-  }) : assert(choices.length > 0);
+  }) : assert(choices.length > 0, 'At least one choice should be provided');
 
   final String label;
   final String? description;
@@ -179,9 +179,9 @@ class _PreferenceChoiceModalState<T> extends State<PreferenceChoiceModal<T>> {
   @override
   Widget build(final BuildContext context) => SafeArea(
         child: Column(
-          children: [
+          children: <Widget>[
             Row(
-              children: [
+              children: <Widget>[
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -204,7 +204,7 @@ class _PreferenceChoiceModalState<T> extends State<PreferenceChoiceModal<T>> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
+              children: <Widget>[
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -220,16 +220,16 @@ class _PreferenceChoiceModalState<T> extends State<PreferenceChoiceModal<T>> {
       );
 
   Widget _buildListItem(final BuildContext context, final int index) {
-    final PreferenceChoiceItem choice = widget.choices[index];
+    final PreferenceChoiceItem<T> choice = widget.choices[index];
 
     return ListTileCentered(
       title: Text(choice.label),
       leading: Radio<T>(
         value: choice.value,
         groupValue: value,
-        onChanged: (final newValue) {
+        onChanged: (final T? newValue) {
           setState(() {
-            value = newValue as T;
+            value = newValue;
           });
           Navigator.of(context).pop(value);
         },
@@ -271,7 +271,7 @@ class PreferenceInfo extends StatelessWidget {
         onTap: onTap,
         onLongPress: onLongPress,
         child: Row(
-          children: [
+          children: <Widget>[
             if (value != null)
               Text(value!, style: Theme.of(context).textTheme.bodyLarge),
             if (trailer != null)

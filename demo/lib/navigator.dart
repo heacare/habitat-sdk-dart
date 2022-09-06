@@ -75,8 +75,11 @@ class _NavigatorPage {
   final _PreferredSizeWidgetBuilder? desktopAppBar;
 }
 
-Route _preferencesRouteBuilder(final BuildContext context, final arguments) =>
-    MaterialPageRoute(
+Route<void> _preferencesRouteBuilder(
+  final BuildContext context,
+  final void arguments,
+) =>
+    MaterialPageRoute<void>(
       builder: (final BuildContext context) =>
           const ForceRTL(PreferencesPage()),
     );
@@ -109,7 +112,7 @@ final List<_NavigatorPage> _navigatorPages = <_NavigatorPage>[
     appBar: (final BuildContext context) => AppBar(
       title: const Text('Account'),
       centerTitle: true,
-      actions: [_preferencesButton(context)],
+      actions: <Widget>[_preferencesButton(context)],
     ),
     desktopScreen: (final BuildContext context) => const AccountScreen(),
     desktopAppBar: (final BuildContext context) => AppBar(
@@ -231,7 +234,7 @@ class _NavigatorState extends State<Navigator> with RestorationMixin {
     final _NavigatorPage selectedPage = _desktopPages[selectedIndex];
     return Scaffold(
       body: Row(
-        children: [
+        children: <Widget>[
           NavigationRail(
             onDestinationSelected: (final int index) {
               setState(() {
@@ -252,7 +255,7 @@ class _NavigatorState extends State<Navigator> with RestorationMixin {
           ),
           Expanded(
             child: Column(
-              children: [
+              children: <Widget>[
                 if (selectedPage.desktopAppBar != null)
                   selectedPage.desktopAppBar!(context),
                 if (selectedPage.desktopScreen != null)

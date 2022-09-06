@@ -7,7 +7,7 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => const Screen(
-        children: [
+        children: <Widget>[
           Center(child: Text('DashboardScreen')),
         ],
       );

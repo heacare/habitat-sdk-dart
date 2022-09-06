@@ -25,7 +25,10 @@ Future<bool> launchUrl(
     case TargetPlatform.android:
     case TargetPlatform.iOS:
       break;
-    default:
+    case TargetPlatform.fuchsia:
+    case TargetPlatform.linux:
+    case TargetPlatform.macOS:
+    case TargetPlatform.windows:
       if (allowedMode == LaunchMode.customTabs) {
         allowedMode = LaunchMode.externalApplication;
       }

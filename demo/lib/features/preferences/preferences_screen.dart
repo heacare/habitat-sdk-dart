@@ -4,8 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart' show PackageInfo;
 import 'package:provider/provider.dart' show Provider;
 
-import '../../system/metadata.dart'
-    show privacyPolicyUrl, sourceUrl, feedbackEmail, feedbackUrl;
+import '../../system/metadata.dart' show sourceUrl, feedbackEmail, feedbackUrl;
 import '../../system/url_launcher.dart' show launchUrl, LaunchMode;
 import '../../widgets/screen.dart' show Screen, listViewPaddingTB;
 import 'preferences.dart';
@@ -46,10 +45,10 @@ class PreferencesScreen extends StatelessWidget {
   List<Widget> _buildGroups(final BuildContext context) {
     final Preferences preferences = Provider.of<Preferences>(context);
 
-    return [
+    return <Widget>[
       PreferenceGroup(
         title: 'Display',
-        items: [
+        items: <Widget>[
           PreferenceChoice<ThemeMode>(
             label: 'Theme',
             choices: _themeModeChoices,
@@ -66,7 +65,7 @@ class PreferencesScreen extends StatelessWidget {
       ),
       PreferenceGroup(
         title: 'About',
-        items: [
+        items: <Widget>[
           PreferenceInfo(
             label: 'Feedback',
             value: feedbackEmail,
@@ -116,16 +115,17 @@ class PreferencesScreen extends StatelessWidget {
   }
 }
 
-const List<PreferenceChoiceItem<ThemeMode>> _themeModeChoices = [
-  PreferenceChoiceItem(
+const List<PreferenceChoiceItem<ThemeMode>> _themeModeChoices =
+    <PreferenceChoiceItem<ThemeMode>>[
+  PreferenceChoiceItem<ThemeMode>(
     value: ThemeMode.system,
     label: 'System',
   ),
-  PreferenceChoiceItem(
+  PreferenceChoiceItem<ThemeMode>(
     value: ThemeMode.light,
     label: 'Light',
   ),
-  PreferenceChoiceItem(
+  PreferenceChoiceItem<ThemeMode>(
     value: ThemeMode.dark,
     label: 'Dark',
   ),
