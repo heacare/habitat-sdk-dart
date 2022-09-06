@@ -11,10 +11,10 @@ part 'message_test.g.dart';
 @JsonSerializable()
 class TestMessage extends Message<MessageDescriptor> {
   TestMessage({
-    final super.data,
-    required final super.descriptor,
-    final super.authorization,
-    final super.attestation,
+    super.data,
+    required super.descriptor,
+    super.authorization,
+    super.attestation,
   });
   factory TestMessage.fromJson(final Map<String, dynamic> json) =>
       _$TestMessageFromJson(json);
@@ -23,10 +23,10 @@ class TestMessage extends Message<MessageDescriptor> {
 @JsonSerializable()
 class Test2Message extends Message<Test2MessageDescriptor> {
   Test2Message({
-    final super.data,
-    required final super.descriptor,
-    final super.authorization,
-    final super.attestation,
+    super.data,
+    required super.descriptor,
+    super.authorization,
+    super.attestation,
   });
   factory Test2Message.fromJson(final Map<String, dynamic> json) =>
       _$Test2MessageFromJson(json);
@@ -35,10 +35,10 @@ class Test2Message extends Message<Test2MessageDescriptor> {
 @JsonSerializable()
 class Test2MessageDescriptor extends MessageDescriptor {
   Test2MessageDescriptor({
-    required final super.nonce,
-    required final super.method,
-    final super.dataCid,
-    final super.dataFormat,
+    required super.nonce,
+    required super.method,
+    super.dataCid,
+    super.dataFormat,
     required this.testParameter,
   });
   factory Test2MessageDescriptor.fromJson(final Map<String, dynamic> json) =>

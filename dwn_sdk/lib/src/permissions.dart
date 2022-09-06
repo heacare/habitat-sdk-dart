@@ -10,8 +10,8 @@ part 'permissions.g.dart';
 class PermissionsRequestMessage extends Message<PermissionsRequestDescriptor> {
   /// Constructs a new PermissionsRequest message
   PermissionsRequestMessage({
-    final super.data,
-    required final super.descriptor,
+    super.data,
+    required super.descriptor,
   });
 
   /// Deserialize object from JSON
@@ -24,8 +24,8 @@ class PermissionsRequestMessage extends Message<PermissionsRequestDescriptor> {
 class PermissionsGrantMessage extends Message<PermissionsGrantDescriptor> {
   /// Constructs a new PermissionsGrant message
   PermissionsGrantMessage({
-    final super.data,
-    required final super.descriptor,
+    super.data,
+    required super.descriptor,
   });
 
   /// Deserialize object from JSON
@@ -38,9 +38,9 @@ class PermissionsGrantMessage extends Message<PermissionsGrantDescriptor> {
 class PermissionsRequestDescriptor extends MessageDescriptor {
   /// Constructor
   const PermissionsRequestDescriptor({
-    required final super.nonce,
-    final super.dataCid,
-    final super.dataFormat,
+    required super.nonce,
+    super.dataCid,
+    super.dataFormat,
     required this.grantedBy,
     required this.description,
     required this.grantedTo,
@@ -49,7 +49,7 @@ class PermissionsRequestDescriptor extends MessageDescriptor {
     this.conditions,
     // TODO(serverwentdown): Move into `super(method: 'MethodName')`
     // https://github.com/google/json_serializable.dart/pull/1178
-    final super.method = 'PermissionRequest',
+    super.method = 'PermissionRequest',
   });
 
   /// Deserialize object from JSON
@@ -86,9 +86,9 @@ class PermissionsRequestDescriptor extends MessageDescriptor {
 class PermissionsGrantDescriptor extends MessageDescriptor {
   /// Constructor
   const PermissionsGrantDescriptor({
-    required final super.nonce,
-    final super.dataCid,
-    final super.dataFormat,
+    required super.nonce,
+    super.dataCid,
+    super.dataFormat,
     required this.permissionGrantId,
     required this.grantedBy,
     required this.description,
@@ -100,7 +100,7 @@ class PermissionsGrantDescriptor extends MessageDescriptor {
     this.conditions,
     // TODO(serverwentdown): Move into `super(method: 'MethodName')`
     // https://github.com/google/json_serializable.dart/pull/1178
-    final super.method = 'PermissionsGrant',
+    super.method = 'PermissionsGrant',
   });
 
   /// Deserialize object from JSON

@@ -10,8 +10,8 @@ part 'collections.g.dart';
 class CollectionsDeleteMessage extends Message<CollectionsDeleteDescriptor> {
   /// Constructs a new CollectionsDelete message
   CollectionsDeleteMessage({
-    final super.data,
-    required final super.descriptor,
+    super.data,
+    required super.descriptor,
   });
 
   /// Deserialize object from JSON
@@ -30,13 +30,13 @@ class CollectionsDeleteMessage extends Message<CollectionsDeleteDescriptor> {
 class CollectionsDeleteDescriptor extends MessageDescriptor {
   /// Constructor
   const CollectionsDeleteDescriptor({
-    required final super.nonce,
+    required super.nonce,
     required this.recordId,
-    final super.dataCid,
-    final super.dataFormat,
+    super.dataCid,
+    super.dataFormat,
     // TODO(serverwentdown): Move into `super(method: 'MethodName')`
     // https://github.com/google/json_serializable.dart/pull/1178
-    final super.method = 'CollectionsDelete',
+    super.method = 'CollectionsDelete',
   });
 
   /// Deserialize object from JSON
@@ -58,8 +58,8 @@ class CollectionsDeleteDescriptor extends MessageDescriptor {
 class CollectionsCommitMessage extends Message<CollectionsCommitDescriptor> {
   /// Constructs a new CollectionsCommit message
   CollectionsCommitMessage({
-    final super.data,
-    required final super.descriptor,
+    super.data,
+    required super.descriptor,
   });
 
   /// Deserialize object from JSON
@@ -78,16 +78,16 @@ class CollectionsCommitMessage extends Message<CollectionsCommitDescriptor> {
 class CollectionsCommitDescriptor extends MessageDescriptor {
   /// Constructor
   const CollectionsCommitDescriptor({
-    required final super.nonce,
+    required super.nonce,
     required this.recordId,
     required this.dateCreated,
-    final super.dataCid,
-    final super.dataFormat,
+    super.dataCid,
+    super.dataFormat,
     this.schema,
     this.dataPublished,
     // TODO(serverwentdown): Move into `super(method: 'MethodName')`
     // https://github.com/google/json_serializable.dart/pull/1178
-    final super.method = 'CollectionsCommit',
+    super.method = 'CollectionsCommit',
   });
 
   /// Deserialize object from JSON
@@ -118,8 +118,8 @@ class CollectionsCommitDescriptor extends MessageDescriptor {
 class CollectionsWriteMessage extends Message<CollectionsWriteDescriptor> {
   /// Constructs a new CollectionsWrite message
   CollectionsWriteMessage({
-    final super.data,
-    required final super.descriptor,
+    super.data,
+    required super.descriptor,
   });
 
   /// Deserialize object from JSON
@@ -138,17 +138,17 @@ class CollectionsWriteMessage extends Message<CollectionsWriteDescriptor> {
 class CollectionsWriteDescriptor extends MessageDescriptor {
   /// Constructor
   const CollectionsWriteDescriptor({
-    required final super.nonce,
+    required super.nonce,
     required this.recordId,
     required this.dateCreated,
-    final super.dataCid,
-    final super.dataFormat,
+    super.dataCid,
+    super.dataFormat,
     this.schema,
     this.published,
     this.dataPublished,
     // TODO(serverwentdown): Move into `super(method: 'MethodName')`
     // https://github.com/google/json_serializable.dart/pull/1178
-    final super.method = 'CollectionsWrite',
+    super.method = 'CollectionsWrite',
   });
 
   /// Deserialize object from JSON
@@ -185,8 +185,8 @@ class CollectionsWriteDescriptor extends MessageDescriptor {
 class CollectionsQueryMessage extends Message<CollectionsQueryDescriptor> {
   /// Constructs a new CollectionsQuery message
   CollectionsQueryMessage({
-    final super.data,
-    required final super.descriptor,
+    super.data,
+    required super.descriptor,
   });
 
   /// Deserialize object from JSON
@@ -205,15 +205,15 @@ class CollectionsQueryMessage extends Message<CollectionsQueryDescriptor> {
 class CollectionsQueryDescriptor extends MessageDescriptor {
   /// Constructor
   const CollectionsQueryDescriptor({
-    required final super.nonce,
-    final super.dataCid,
-    final super.dataFormat,
+    required super.nonce,
+    super.dataCid,
+    super.dataFormat,
     this.schema,
     this.recordId,
     this.dateSort,
     // TODO(serverwentdown): Move into `super(method: 'MethodName')`
     // https://github.com/google/json_serializable.dart/pull/1178
-    final super.method = 'CollectionsQuery',
+    super.method = 'CollectionsQuery',
   });
 
   /// Deserialize object from JSON

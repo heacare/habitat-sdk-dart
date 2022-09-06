@@ -8,4 +8,9 @@
 library dwn_sdk;
 
 export 'src/cid.dart';
+export 'src/collections.dart';
+export 'src/collections_interface.dart';
+export 'src/dwn.dart';
+export 'src/interface.dart';
 export 'src/message.dart';
+export 'src/permissions.dart';
