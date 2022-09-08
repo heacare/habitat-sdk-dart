@@ -4,3 +4,4 @@
 library habitat_sdk;
 
 export 'src/dwn.dart';
+export 'src/habitat_client.dart';
