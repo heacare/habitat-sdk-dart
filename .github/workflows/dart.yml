@@ -1,4 +1,4 @@
-# Created with package:mono_repo v6.3.0
+# Created with package:mono_repo v6.4.0
 name: Dart CI
 on:
   push:
@@ -16,32 +16,11 @@ permissions: read-all
 
 jobs:
   job_001:
-    name: mono_repo self validate
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@4504faf7e9bcf8f3ed0bc863c4e1d21499ab8ef8
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - uses: heacare/setup-dart@add-matcher
-        with:
-          sdk: stable
-      - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
-      - name: mono_repo self validate
-        run: dart pub global activate mono_repo 6.3.0
-      - name: mono_repo self validate
-        run: dart pub global run mono_repo generate --validate
-  job_002:
     name: "analyze_and_format; Flutter stable; PKG: demo; `dart format --output=none --set-exit-if-changed .`, `flutter analyze | sed \"s/^   info/warning/g\"`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
-        uses: actions/cache@4504faf7e9bcf8f3ed0bc863c4e1d21499ab8ef8
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77
         with:
           path: "~/.pub-cache/hosted"
           key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:demo;commands:format-analyze_0"
@@ -50,32 +29,32 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
-      - uses: subosito/flutter-action@2fb73e25c9488eb544b9b14b2ce00c4c2baf789e
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@9d48f4efd5460d7013af812069d08b23f37aed20
         with:
           channel: stable
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        name: Checkout repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: demo_pub_upgrade
-        name: demo; flutter pub pub upgrade
+        name: demo; flutter pub upgrade
+        run: flutter pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: demo
-        run: flutter pub pub upgrade
       - name: "demo; dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.demo_pub_upgrade.conclusion == 'success'"
-        working-directory: demo
         run: "dart format --output=none --set-exit-if-changed ."
-      - name: "demo; flutter analyze | sed \"s/^   info/warning/g\""
         if: "always() && steps.demo_pub_upgrade.conclusion == 'success'"
         working-directory: demo
+      - name: "demo; flutter analyze | sed \"s/^   info/warning/g\""
         run: "flutter analyze | sed \"s/^   info/warning/g\""
-    needs:
-      - job_001
-  job_003:
+        if: "always() && steps.demo_pub_upgrade.conclusion == 'success'"
+        working-directory: demo
+  job_002:
     name: "analyze_and_format; Dart stable; PKG: dwn_sdk; `dart format --output=none --set-exit-if-changed .`, `dart analyze | sed \"s/^   info/warning/g\"`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
-        uses: actions/cache@4504faf7e9bcf8f3ed0bc863c4e1d21499ab8ef8
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77
         with:
           path: "~/.pub-cache/hosted"
           key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:dwn_sdk;commands:format-analyze_1"
@@ -84,32 +63,32 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
-      - uses: heacare/setup-dart@add-matcher
+      - name: Setup Dart SDK
+        uses: heacare/setup-dart@add-matcher
         with:
           sdk: stable
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        name: Checkout repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: dwn_sdk_pub_upgrade
         name: dwn_sdk; dart pub upgrade
+        run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: dwn_sdk
-        run: dart pub upgrade
       - name: "dwn_sdk; dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.dwn_sdk_pub_upgrade.conclusion == 'success'"
-        working-directory: dwn_sdk
         run: "dart format --output=none --set-exit-if-changed ."
-      - name: "dwn_sdk; dart analyze | sed \"s/^   info/warning/g\""
         if: "always() && steps.dwn_sdk_pub_upgrade.conclusion == 'success'"
         working-directory: dwn_sdk
+      - name: "dwn_sdk; dart analyze | sed \"s/^   info/warning/g\""
         run: "dart analyze | sed \"s/^   info/warning/g\""
-    needs:
-      - job_001
-  job_004:
+        if: "always() && steps.dwn_sdk_pub_upgrade.conclusion == 'success'"
+        working-directory: dwn_sdk
+  job_003:
     name: "analyze_and_format; Dart stable; PKG: habitat_sdk; `dart format --output=none --set-exit-if-changed .`, `dart analyze | sed \"s/^   info/warning/g\"`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
-        uses: actions/cache@4504faf7e9bcf8f3ed0bc863c4e1d21499ab8ef8
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77
         with:
           path: "~/.pub-cache/hosted"
           key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:habitat_sdk;commands:format-analyze_1"
@@ -118,32 +97,32 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
-      - uses: heacare/setup-dart@add-matcher
+      - name: Setup Dart SDK
+        uses: heacare/setup-dart@add-matcher
         with:
           sdk: stable
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        name: Checkout repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: habitat_sdk_pub_upgrade
         name: habitat_sdk; dart pub upgrade
+        run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: habitat_sdk
-        run: dart pub upgrade
       - name: "habitat_sdk; dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.habitat_sdk_pub_upgrade.conclusion == 'success'"
-        working-directory: habitat_sdk
         run: "dart format --output=none --set-exit-if-changed ."
-      - name: "habitat_sdk; dart analyze | sed \"s/^   info/warning/g\""
         if: "always() && steps.habitat_sdk_pub_upgrade.conclusion == 'success'"
         working-directory: habitat_sdk
+      - name: "habitat_sdk; dart analyze | sed \"s/^   info/warning/g\""
         run: "dart analyze | sed \"s/^   info/warning/g\""
-    needs:
-      - job_001
-  job_005:
+        if: "always() && steps.habitat_sdk_pub_upgrade.conclusion == 'success'"
+        working-directory: habitat_sdk
+  job_004:
     name: "unit_test; Dart dev; PKG: dwn_sdk; `dart test --test-randomize-ordering-seed=random`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
-        uses: actions/cache@4504faf7e9bcf8f3ed0bc863c4e1d21499ab8ef8
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77
         with:
           path: "~/.pub-cache/hosted"
           key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:dwn_sdk;commands:test_1"
@@ -152,31 +131,32 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted;sdk:dev
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
-      - uses: heacare/setup-dart@add-matcher
+      - name: Setup Dart SDK
+        uses: heacare/setup-dart@add-matcher
         with:
           sdk: dev
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        name: Checkout repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: dwn_sdk_pub_upgrade
         name: dwn_sdk; dart pub upgrade
+        run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: dwn_sdk
-        run: dart pub upgrade
       - name: "dwn_sdk; dart test --test-randomize-ordering-seed=random"
+        run: "dart test --test-randomize-ordering-seed=random"
         if: "always() && steps.dwn_sdk_pub_upgrade.conclusion == 'success'"
         working-directory: dwn_sdk
-        run: "dart test --test-randomize-ordering-seed=random"
     needs:
       - job_001
       - job_002
       - job_003
-      - job_004
-  job_006:
+  job_005:
     name: "unit_test; Dart dev; PKG: habitat_sdk; `dart test --test-randomize-ordering-seed=random`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
-        uses: actions/cache@4504faf7e9bcf8f3ed0bc863c4e1d21499ab8ef8
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77
         with:
           path: "~/.pub-cache/hosted"
           key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:habitat_sdk;commands:test_1"
@@ -185,31 +165,32 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted;sdk:dev
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
-      - uses: heacare/setup-dart@add-matcher
+      - name: Setup Dart SDK
+        uses: heacare/setup-dart@add-matcher
         with:
           sdk: dev
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        name: Checkout repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: habitat_sdk_pub_upgrade
         name: habitat_sdk; dart pub upgrade
+        run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: habitat_sdk
-        run: dart pub upgrade
       - name: "habitat_sdk; dart test --test-randomize-ordering-seed=random"
+        run: "dart test --test-randomize-ordering-seed=random"
         if: "always() && steps.habitat_sdk_pub_upgrade.conclusion == 'success'"
         working-directory: habitat_sdk
-        run: "dart test --test-randomize-ordering-seed=random"
     needs:
       - job_001
       - job_002
       - job_003
-      - job_004
-  job_007:
+  job_006:
     name: "unit_test; Flutter stable; PKG: demo; `flutter test --test-randomize-ordering-seed=random`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
-        uses: actions/cache@4504faf7e9bcf8f3ed0bc863c4e1d21499ab8ef8
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77
         with:
           path: "~/.pub-cache/hosted"
           key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:demo;commands:test_0"
@@ -218,31 +199,32 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
-      - uses: subosito/flutter-action@2fb73e25c9488eb544b9b14b2ce00c4c2baf789e
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@9d48f4efd5460d7013af812069d08b23f37aed20
         with:
           channel: stable
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        name: Checkout repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: demo_pub_upgrade
-        name: demo; flutter pub pub upgrade
+        name: demo; flutter pub upgrade
+        run: flutter pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: demo
-        run: flutter pub pub upgrade
       - name: "demo; flutter test --test-randomize-ordering-seed=random"
+        run: "flutter test --test-randomize-ordering-seed=random"
         if: "always() && steps.demo_pub_upgrade.conclusion == 'success'"
         working-directory: demo
-        run: "flutter test --test-randomize-ordering-seed=random"
     needs:
       - job_001
       - job_002
       - job_003
-      - job_004
-  job_008:
+  job_007:
     name: "unit_test; Dart stable; PKG: dwn_sdk; `dart test --test-randomize-ordering-seed=random`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
-        uses: actions/cache@4504faf7e9bcf8f3ed0bc863c4e1d21499ab8ef8
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77
         with:
           path: "~/.pub-cache/hosted"
           key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:dwn_sdk;commands:test_1"
@@ -251,31 +233,32 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
-      - uses: heacare/setup-dart@add-matcher
+      - name: Setup Dart SDK
+        uses: heacare/setup-dart@add-matcher
         with:
           sdk: stable
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        name: Checkout repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: dwn_sdk_pub_upgrade
         name: dwn_sdk; dart pub upgrade
+        run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: dwn_sdk
-        run: dart pub upgrade
       - name: "dwn_sdk; dart test --test-randomize-ordering-seed=random"
+        run: "dart test --test-randomize-ordering-seed=random"
         if: "always() && steps.dwn_sdk_pub_upgrade.conclusion == 'success'"
         working-directory: dwn_sdk
-        run: "dart test --test-randomize-ordering-seed=random"
     needs:
       - job_001
       - job_002
       - job_003
-      - job_004
-  job_009:
+  job_008:
     name: "unit_test; Dart stable; PKG: habitat_sdk; `dart test --test-randomize-ordering-seed=random`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
-        uses: actions/cache@4504faf7e9bcf8f3ed0bc863c4e1d21499ab8ef8
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77
         with:
           path: "~/.pub-cache/hosted"
           key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:habitat_sdk;commands:test_1"
@@ -284,22 +267,23 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
-      - uses: heacare/setup-dart@add-matcher
+      - name: Setup Dart SDK
+        uses: heacare/setup-dart@add-matcher
         with:
           sdk: stable
       - id: checkout
-        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+        name: Checkout repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - id: habitat_sdk_pub_upgrade
         name: habitat_sdk; dart pub upgrade
+        run: dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: habitat_sdk
-        run: dart pub upgrade
       - name: "habitat_sdk; dart test --test-randomize-ordering-seed=random"
+        run: "dart test --test-randomize-ordering-seed=random"
         if: "always() && steps.habitat_sdk_pub_upgrade.conclusion == 'success'"
         working-directory: habitat_sdk
-        run: "dart test --test-randomize-ordering-seed=random"
     needs:
       - job_001
       - job_002
       - job_003
-      - job_004
