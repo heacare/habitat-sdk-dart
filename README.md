@@ -16,6 +16,15 @@ This repository includes an implementation of DWN in Dart with a similar API as 
 | Habitat SDK | [![pub package](https://img.shields.io/pub/v/habitat_sdk.svg)](https://pub.dev/packages/habitat_sdk) | [API reference](https://pub.dev/documentation/habitat_sdk) | [Browse](habitat_sdk) |
 | DWN SDK | [![pub package](https://img.shields.io/pub/v/dwn_sdk.svg)](https://pub.dev/packages/dwn_sdk) | [API reference](https://pub.dev/documentation/dwn_sdk) | [Browse](dwn_sdk) |
 
+## `mono_repo`
+
+To generate CI files, run:
+
+```sh
+mono_repo generate
+sed -i 's,dart-lang/setup-dart@.*,heacare/setup-dart@add-matcher,g' .github/workflows/dart.yml
+```
+
 ## Roadmap
 
 - [ ] Preliminary DWN SDK in Dart

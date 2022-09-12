@@ -67,7 +67,11 @@ for PKG in ${PKGS}; do
       echo
       echo -e "\033[1mPKG: ${PKG}; TASK: ${TASK}\033[22m"
       case ${TASK} in
-      analyze)
+      analyze_0)
+        echo 'flutter analyze | sed "s/^   info/warning/g"'
+        flutter analyze | sed "s/^   info/warning/g" || EXIT_CODE=$?
+        ;;
+      analyze_1)
         echo 'dart analyze | sed "s/^   info/warning/g"'
         dart analyze | sed "s/^   info/warning/g" || EXIT_CODE=$?
         ;;
@@ -75,7 +79,11 @@ for PKG in ${PKGS}; do
         echo 'dart format --output=none --set-exit-if-changed .'
         dart format --output=none --set-exit-if-changed . || EXIT_CODE=$?
         ;;
-      test)
+      test_0)
+        echo 'flutter test --test-randomize-ordering-seed=random'
+        flutter test --test-randomize-ordering-seed=random || EXIT_CODE=$?
+        ;;
+      test_1)
         echo 'dart test --test-randomize-ordering-seed=random'
         dart test --test-randomize-ordering-seed=random || EXIT_CODE=$?
         ;;
