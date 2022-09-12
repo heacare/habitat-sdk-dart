@@ -16,6 +16,7 @@ abstract class Preferences extends ChangeNotifier {
   Future<void> setThemeMode(final ThemeMode themeMode);
 
   bool get forceRTL;
+  // ignore: avoid_positional_boolean_parameters
   Future<void> setForceRTL(final bool rtl);
 
   Locale? get locale;
@@ -91,11 +92,13 @@ class AppPreferences extends Preferences {
 
   String? _getString(final String key) => _instance.getString(key);
 
+  // ignore: unused_element
   Future<void> _setInt(final String key, final int value) async {
     await _instance.setInt(key, value);
     notifyListeners();
   }
 
+  // ignore: unused_element
   int? _getInt(final String key) => _instance.getInt(key);
 
   Future<void> _setBool(final String key, final bool value) async {

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'collections.dart';
 import 'interface.dart';
 
