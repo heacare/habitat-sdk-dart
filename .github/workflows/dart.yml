@@ -30,7 +30,7 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Flutter SDK
-        uses: subosito/flutter-action@9d48f4efd5460d7013af812069d08b23f37aed20
+        uses: subosito/flutter-action@1e6ee87cb840500837bcd50a667fb28815d8e310
         with:
           channel: stable
       - id: checkout
@@ -200,7 +200,7 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Flutter SDK
-        uses: subosito/flutter-action@9d48f4efd5460d7013af812069d08b23f37aed20
+        uses: subosito/flutter-action@1e6ee87cb840500837bcd50a667fb28815d8e310
         with:
           channel: stable
       - id: checkout
