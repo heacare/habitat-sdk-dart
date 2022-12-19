@@ -35,7 +35,7 @@ jobs:
           channel: stable
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
       - id: demo_pub_upgrade
         name: demo; flutter pub upgrade
         run: flutter pub upgrade
@@ -69,7 +69,7 @@ jobs:
           sdk: stable
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
       - id: dwn_sdk_pub_upgrade
         name: dwn_sdk; dart pub upgrade
         run: dart pub upgrade
@@ -103,7 +103,7 @@ jobs:
           sdk: stable
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
       - id: habitat_sdk_pub_upgrade
         name: habitat_sdk; dart pub upgrade
         run: dart pub upgrade
@@ -137,7 +137,7 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
       - id: dwn_sdk_pub_upgrade
         name: dwn_sdk; dart pub upgrade
         run: dart pub upgrade
@@ -171,7 +171,7 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
       - id: habitat_sdk_pub_upgrade
         name: habitat_sdk; dart pub upgrade
         run: dart pub upgrade
@@ -205,7 +205,7 @@ jobs:
           channel: stable
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
       - id: demo_pub_upgrade
         name: demo; flutter pub upgrade
         run: flutter pub upgrade
@@ -239,7 +239,7 @@ jobs:
           sdk: stable
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
       - id: dwn_sdk_pub_upgrade
         name: dwn_sdk; dart pub upgrade
         run: dart pub upgrade
@@ -273,7 +273,7 @@ jobs:
           sdk: stable
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
       - id: habitat_sdk_pub_upgrade
         name: habitat_sdk; dart pub upgrade
         run: dart pub upgrade
